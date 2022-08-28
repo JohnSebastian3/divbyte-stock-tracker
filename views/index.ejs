@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Your Dashboard</h1>
+    
+  <h3>Add stock</h3>
+  <form action="/dashboard" method="POST">
+    <input type="text" name="ticker" placeholder="Ticker symbol ex. APPL">
+    <input type="text" name="shares" placeholder="Number of shares">
+    <input type="number" name="basis" placeholder="Cost Basis">
+    <button type="submit">Add</button>
+  </form>
+  
+  <ul>
+    <% for(let i = 0; i < stocks.length; i++) { %>
+      <li class="stock">
+        <span>Ticker: <%= stocks[i].ticker %></span>
+        <span>Shares: <%= stocks[i].shares%></span>
+        <span>Basis: $<%= stocks[i].basis%></span>
+      </li>
+      <!-- Add value to total here -->
+      <% } %>
+    </ul>
+    
+    <h2>Portfolio Value: $<span class="totalValue">22000</span></h2>
+    <h2>Yearly Dividend Income: $<span class="yearlyDividend">414</span> a year</h2>
+    <h2>Real time: $<span class="realTime"></span></h2>
+    <script src="js/main.js"></script>
+  </body>
+</html>

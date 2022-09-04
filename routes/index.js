@@ -11,11 +11,11 @@ router.get('/', (req, res) => {
 
 // @desc    LDashboard
 // @route   Get /dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) => {
-  res.render('dashboard.ejs', {
-    name: req.user.name
-  });
-})
+// router.get('/dashboard', ensureAuthenticated, (req, res) => {
+//   res.render('dashboard.ejs', {
+//     name: req.user.name
+//   });
+// })
 
 
 module.exports = router;

@@ -21,8 +21,9 @@ async function getDividend() {
     } catch(err) {
       console.error(err);
     }
-    document.querySelector('.yearlyDividend').innerText = annualDividend;
+    document.querySelector('.yearlyDividend').innerText = annualDividend.toFixed(2);
   }
+  calculateRealTime();
 }
 
 // Get current price of the ticker
@@ -39,14 +40,13 @@ async function getCurrentPrice() {
             `https://financialmodelingprep.com/api/v3/quote-short/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`
           )
       const stockPrice = await response.json();
-      console.log(stockPrice);
       totalValue += shares * (stockPrice[0].price);
     } catch(err) {
       console.error(err);
     }
   }
   
-  document.querySelector('.totalValue').innerText = `$${totalValue.toFixed(2)}`;
+  document.querySelector('.totalValue').innerText = totalValue.toFixed(2);
 }
 
 function calculateRealTime() {
@@ -59,18 +59,17 @@ function calculateRealTime() {
   const hourly = daily / 24;
   const minute = hourly / 60;
   const second = minute / 60;
-  // console.log('yearly:', yearlyDividend);
-  // console.log('monthly:', monthly);
-  // console.log('daily:', daily);
-  // console.log('hourly:', hourly);
-  // console.log('minute:', minute);
-  // console.log('second:', second);
+  console.log('yearly:', yearlyDividend);
+  console.log('monthly:', monthly);
+  console.log('daily:', daily);
+  console.log('hourly:', hourly);
+  console.log('minute:', minute);
+  console.log('second:', second);
   setInterval(() => {
     totalValue += second / 2;
     realTime.innerText = totalValue;
   }, 500)
 }
 
-// getCurrentPrice();
-// getDividend();
-calculateRealTime();
+getCurrentPrice();
+getDividend();

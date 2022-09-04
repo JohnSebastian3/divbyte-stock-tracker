@@ -13,6 +13,10 @@ const StockSchema = new mongoose.Schema({
   basis: {
     type: Number,
     required: true,
+  },
+  userId: {
+    type: String,
+    required: true
   }
 })
 

@@ -34,7 +34,7 @@ async function getStockData() {
       currentPrice.innerText = ` Current Price: $${(stockQuote[0].price).toFixed(2)}`;
       stockList[i].append(currentPrice);
       const profitLoss = document.createElement('span')
-      profitLoss.innerText = ` Proft/Loss: $${(shares * (stockQuote[0].price - avgCost)).toFixed(2)}`;
+      profitLoss.innerText = ` Proft/Loss: $${((shares * stockQuote[0].price) - (shares * avgCost)).toFixed(2)}`;
       stockList[i].append(profitLoss);
 
       annualDividend += shares * historicDividends.historical[0].dividend * 4; // quarterly for now, will add algo to change this soon
@@ -44,7 +44,7 @@ async function getStockData() {
       dividend.innerText = ` Dividend: ${dividendYield}%`;
       stockList[i].append(dividend);
 
-      stockList[i].append(deleteLink);
+  
     } catch(err) {
       console.error(err);
     }

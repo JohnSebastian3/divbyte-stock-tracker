@@ -26,5 +26,15 @@ router.post('/', async (req, res) => {
   }
 })
 
+// @desc    remove stock entry
+// @route   Get /remove/:id
+router.get('/remove/:id', async (req, res) => {
+  const id = req.params.id;
+  Stock.findByIdAndRemove(id, err => {
+    if(err) return res.status(500).send(err);
+    res.redirect('/dashboard');
+  })
+})
+
 
 module.exports = router;

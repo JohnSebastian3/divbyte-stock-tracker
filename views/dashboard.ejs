@@ -13,7 +13,7 @@
   <form action="/dashboard" method="POST">
     <input type="text" name="ticker" placeholder="Ticker symbol ex. APPL">
     <input type="text" name="shares" placeholder="Number of shares">
-    <input type="number" name="basis" placeholder="Cost Basis">
+    <input type="text" name="basis" placeholder="Cost Basis">
     <button type="submit">Add</button>
   </form>
   
@@ -23,6 +23,7 @@
         <span>Ticker: <%= stocks[i].ticker %></span>
         <span>Shares: <%= stocks[i].shares%></span>
         <span>Basis: $<%= stocks[i].basis%></span>
+        <a href="/dashboard/remove/<%= stocks[i]._id %>">Delete</a>
       </li>
       <!-- Add value to total here -->
       <% } %>

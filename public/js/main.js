@@ -1,4 +1,8 @@
 
+const deleteButtons = document.querySelectorAll('.deleteButton');
+Array.from(deleteButtons).forEach(button => {
+  button.addEventListener('click', deleteStock);
+})
 let totalValue = 0;
 let annualDividend = 0;
 
@@ -77,6 +81,26 @@ function calculateRealTime() {
     totalValue += second / 2;
     realTime.innerText = totalValue;
   }, 500)
+}
+
+async function deleteStock() {
+  console.log('reached!');
+  const stockId = this.parentNode.dataset.id;
+  try {
+    const res = await fetch('dashboard/deleteStock', {
+      method: 'delete',
+      headers: {'Content-type': 'application/json'},
+      body: JSON.stringify({
+        'stockIdFromJSFile': stockId,
+      })
+    })
+    const data = await res.json();
+    console.log(data);
+    console.log('deleted');
+    location.reload();
+  } catch(err) {
+    console.log(err);
+  }
 }
 
 // getCurrentPrice();

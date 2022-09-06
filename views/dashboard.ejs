@@ -19,11 +19,11 @@
   
   <ul>
     <% for(let i = 0; i < stocks.length; i++) { %>
-      <li class="stock">
+      <li class="stock" data-id="<%= stocks[i]._id%>">
         <span>Ticker: <%= stocks[i].ticker %></span>
         <span>Shares: <%= stocks[i].shares%></span>
         <span>Basis: $<%= stocks[i].basis%></span>
-        <a href="/dashboard/remove/<%= stocks[i]._id %>">Delete</a>
+        <span class="deleteButton">Delete</span>
       </li>
       <!-- Add value to total here -->
       <% } %>

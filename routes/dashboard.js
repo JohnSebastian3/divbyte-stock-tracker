@@ -26,15 +26,19 @@ router.post('/', async (req, res) => {
   }
 })
 
-// @desc    remove stock entry
-// @route   Get /remove/:id
-router.get('/remove/:id', async (req, res) => {
-  const id = req.params.id;
-  Stock.findByIdAndRemove(id, err => {
-    if(err) return res.status(500).send(err);
-    res.redirect('/dashboard');
-  })
+
+
+router.delete('/deleteStock', async(req, res) => {
+  try {
+    const id = req.body.stockIdFromJSFile;
+    await Stock.findOneAndDelete({_id: id});
+    res.json('deleted');
+    console.log('Deleted Stock!');
+  } catch(err) {
+    console.log(err);
+  }
 })
+
 
 
 module.exports = router;

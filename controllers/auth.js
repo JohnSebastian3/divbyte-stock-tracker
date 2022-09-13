@@ -12,7 +12,7 @@ module.exports = {
   postLogin: (req, res, next) => {
     passport.authenticate('local', {
       successRedirect: '/dashboard',
-      failureRedirect: '/users/login',
+      failureRedirect: '/login',
       failureFlash: true,
     })(req, res, next);
   },
@@ -81,7 +81,7 @@ module.exports = {
             newUser.save()
               .then(user =>  {
                 req.flash('success_message', 'You are now registered and can log in!');
-                res.redirect('/users/login');
+                res.redirect('/login');
               })
               .catch(err => console.log(err));
           })
@@ -94,7 +94,7 @@ module.exports = {
     req.logout((err) => {
       if(err) return next(err);
       req.flash('success_message', 'You are logged out');
-      res.redirect('/users/login');
+      res.redirect('/login');
     });
   }
 }

@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const homeRouter = require('../controllers/home');
 const {ensureAuthenticated} = require('../config/auth');
 
 
 // @desc    Landing page
 // @route   Get /
-router.get('/', (req, res) => {
-  res.render('welcome.ejs', req);
-})
+router.get('/', homeRouter.getHome);
 
 // @desc    LDashboard
 // @route   Get /dashboard

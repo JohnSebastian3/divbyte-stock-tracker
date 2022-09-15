@@ -1,10 +1,13 @@
 const express = require('express');
-const connectDB = require('./config/db');
+const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
 const session = require('express-session');
+const MongoStore = require("connect-mongo")(session)
+const methodOverride = require('method-override');
 const passport = require('passport');
-const app = express();
+const connectDB = require('./config/db');
+const { default: mongoose } = require('mongoose');
 require('dotenv').config({path: './config/.env'});
 
 // Passport config
@@ -23,11 +26,15 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//Use forms for put / delete
+app.use(methodOverride("_method"));
+
 // Express session
 app.use(session({
   secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
 // Passport middleware

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {ensureAuthenticated} = require('../config/auth');
+const {ensureAuth, ensureGuest} = require('../middleware/auth');
 const dashboardController = require('../controllers/dashboard');
 
 
-router.get('/', ensureAuthenticated, dashboardController.getDashboard)
+router.get('/', ensureAuth, dashboardController.getDashboard)
 router.post('/addStock', dashboardController.addStock);
 router.delete('/deleteStock', dashboardController.deleteStock);
 

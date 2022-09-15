@@ -3,7 +3,7 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
 const session = require('express-session');
-const MongoStore = require("connect-mongo")(session)
+const MongoStore = require("connect-mongo");
 const methodOverride = require('method-override');
 const passport = require('passport');
 const connectDB = require('./config/db');
@@ -30,12 +30,14 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 
 // Express session
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}))
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
+  })
+);
 
 // Passport middleware
 app.use(passport.initialize());

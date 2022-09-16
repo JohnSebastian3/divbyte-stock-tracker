@@ -1,3 +1,30 @@
+const form = document.querySelector('form');
+const tickerInput = document.querySelector('#ticker');
+const sharesInput = document.querySelector('#shares');
+const basisInput = document.querySelector('#basis');
+const errorElement = document.querySelector('#error');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  let messages = [];
+
+  const quoteResponse = await fetch(
+    `https://financialmodelingprep.com/api/v3/quote/${tickerInput.value}?apikey=ac08be8670bfbfba904e1e17d7596342`
+  )
+  const stockQuote = await quoteResponse.json();
+ 
+  if(stockQuote.length === 0) {
+    messages.push('Please enter a valid ticker symbol!');
+  }
+
+  errorElement.innerText = messages.join(', ');
+
+  if(messages.length === 0) {
+    form.submit();
+  }
+
+
+})
 
 const deleteButtons = document.querySelectorAll('.deleteButton');
 Array.from(deleteButtons).forEach(button => {
@@ -5,7 +32,6 @@ Array.from(deleteButtons).forEach(button => {
 })
 let totalValue = 0;
 let annualDividend = 0;
-
 
 async function getStockData() {
   let stockList = document.querySelectorAll('.stock');
@@ -20,12 +46,13 @@ async function getStockData() {
       const divResponse = await fetch(
         `https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`);
       const historicDividends = await divResponse.json();
-      console.log(`Historic Dividend info`, historicDividends);
+  
 
       const quoteResponse = await fetch(
         `https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`
       )
       const stockQuote = await quoteResponse.json();
+
       console.log('Current stock quote', stockQuote);
       const change = stockQuote[0].change;
       console.log(change);
@@ -50,7 +77,7 @@ async function getStockData() {
 
   
     } catch(err) {
-      console.error(err);
+      console.log(err);
     }
     document.querySelector('.yearlyDividend').innerText = annualDividend.toFixed(2);
     document.querySelector('.totalValue').innerText = totalValue.toFixed(2);

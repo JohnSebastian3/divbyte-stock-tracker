@@ -10,11 +10,15 @@
   <h1><%= user.name %>'s Portfolio</h1>
     
   <h3>Add stock</h3>
+  <div id="error"></div>
   <form action="/dashboard/addStock" method="POST">
-    <input type="text" name="ticker" placeholder="Ticker symbol ex. APPL">
-    <input type="text" name="shares" placeholder="Number of shares">
-    <input type="text" name="basis" placeholder="Cost Basis">
-    <button type="submit">Add</button>
+    <label for="ticker">Ticker</label>
+    <input type="text" name="ticker" id="ticker" placeholder="ex. APPL" required>
+    <label for="shares">Number of Shares</label>
+    <input type="text" name="shares" id="shares" placeholder="Number of shares" required>
+    <label for="basis">Average Cost</label>
+    <input type="text" name="basis" id="basis" placeholder="Cost Basis" required>
+    <button type="submit" id="addStock">Add</button>
   </form>
   
   <ul>

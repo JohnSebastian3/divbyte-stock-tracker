@@ -7,7 +7,8 @@ const MongoStore = require("connect-mongo");
 const methodOverride = require('method-override');
 const passport = require('passport');
 const connectDB = require('./config/db');
-const { default: mongoose } = require('mongoose');
+const dashboardRoutes = require('./routes/dashboard');
+
 require('dotenv').config({path: './config/.env'});
 
 // Passport config
@@ -57,7 +58,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/', require('./routes/index'));
-app.use('/dashboard', require('./routes/dashboard'));
+app.use('/dashboard', dashboardRoutes);
 
 
 app.listen(process.env.PORT, () => {

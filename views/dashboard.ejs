@@ -5,34 +5,100 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/dashboard.css">
   <title>Document</title>
 </head>
 <body>
   <h1><%= user.name %>'s Portfolio</h1>
-    
-  <h3>Add stock</h3>
+  
+  <button id="addButton">Add Stock</button>
   <div id="error"></div>
-  <form action="/dashboard/addStock" method="POST">
-    <label for="ticker">Ticker</label>
-    <input type="text" name="ticker" id="ticker" placeholder="ex. APPL" required>
-    <label for="shares">Number of Shares</label>
-    <input type="text" name="shares" id="shares" placeholder="Number of shares" required>
-    <label for="basis">Average Cost</label>
-    <input type="text" name="basis" id="basis" placeholder="Cost Basis" required>
-    <button type="submit" id="addStock">Add</button>
-  </form>
+
+  <div id="form" class="modal-container">
+    <div class="modal">
+      <div id="close-modal">
+        <h3>Add New Holding</h3>
+        <span id="close">ⓧ</span>
+      </div>
+      <form action="/dashboard/addStock" method="POST">
+        <label for="ticker">Ticker</label>
+        <input type="text" name="ticker" id="ticker" placeholder="ex. AAPL" required>
+        <label for="shares">Number of Shares</label>
+        <input type="text" name="shares" id="shares" placeholder="Number of shares" required>
+        <label for="basis">Average Cost</label>
+        <input type="text" name="basis" id="basis" placeholder="Cost Basis" required>
+        <button type="submit" id="addStock" class="btn btn-primary">Add</button>
+      </form>
+
+    </div>
+
+  </div>
+
+  <table id="stockTable">
+    <thead>
+      <tr>
+        <th class="wide-cell">
+          Ticker
+        </th>
+        <th class="normal-cell">
+          Shares
+        </th>
+        <th class="normal-cell">
+          Basis
+        </th>
+        <th class="normal-cell">
+          Change
+        </th>
+        <th class="normal-cell">
+          Current Price
+        </th>
+        <th class="normal-cell">
+          Profit/Loss
+        </th>
+        <th class="normal-cell">
+          Dividend
+        </th>
+        <th class="normal-cell">
+          Edit/Delete
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% for(let i = 0; i < stocks.length; i++) { %>
+        <tr class="row" data-id="<%= stocks[i]._id%>">
+          <td id="stockName">
+            <div id="symbol">
+              <%= stocks[i].ticker %> 
+            </div>
+            <div id="corporation">
+
+            </div>
+          </td>
+          <td>
+            <%= stocks[i].shares %> 
+          </td>
+          <td>
+            $<%= stocks[i].basis %> 
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <button type="button" class="deleteButton">Delete</button>
+          </td>
+          <!-- Add value to total here --> 
+        </tr>
+      <% } %>
+        
+    </tbody>
+  </table>
   
   <ul>
-    <% for(let i = 0; i < stocks.length; i++) { %>
-      <li class="stock" data-id="<%= stocks[i]._id%>">
-        <span>Ticker: <%= stocks[i].ticker %></span>
-        <span>Shares: <%= stocks[i].shares%></span>
-        <span>Basis: $<%= stocks[i].basis%></span>
-        <button type="button" class="deleteButton">Delete</button>
-      </li>
-      <!-- Add value to total here -->
-      <% } %>
-    </ul>
+    
+  </ul>
     
     <h2>Portfolio Value: $<span class="totalValue">0</span></h2>
     <h2>Yearly Dividend Income: $<span class="yearlyDividend">0</span> a year</h2>

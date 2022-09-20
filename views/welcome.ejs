@@ -5,13 +5,74 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/welcome.css">
   <title>DivByte </title>
 </head>
 <body>
-  <div class="container"></div>
-  <p>Create an account or login</p>
-  <a href="/register">Register</a>
-  <br>
-  <a href="/login">Login</a>
+  <div class="container auto-margin flex gap-lg dir-col justify-ct vh-stretch">
+    <div>
+      <h1 id="heading-main" class="weight-b text-ct h1-large">The Simple and Elegant Portfolio Tracker App</h1>
+      <p class="text-ct p-large">Stay Up to Date with the Performance and Dividend Income of Your Portfolio</p>
+    </div>
+
+    <div class="box-md auto-margin flex justify-ar align-ct dir-col white light-shadow">
+      <h2>Create An Account</h2>
+      <%- include ('./partials/messages') %>
+      <form action="/register" method="POST" id="register" class="">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="name"
+            id="name"
+            name="name"
+            class="form-control"
+            placeholder="Enter Name"
+            value="<%= typeof name != 'undefined' ? name : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter Email"
+            value="<%= typeof email != 'undefined' ? email : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Create Password"
+            value="<%= typeof password != 'undefined' ? password : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input
+            type="password"
+            id="password2"
+            name="password2"
+            class="form-control"
+            placeholder="Confirm Password"
+            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+          />
+        </div>
+        <div class="flex justify-ct">
+          <button type="submit" class="btn btn-primary w-stretch">
+            Register
+          </button>
+        </div>
+      </form>
+
+      <p>Have an account? <a href="/login">Login Here</a></p>
+    </div>
+    </div>
 </body>
 </html>

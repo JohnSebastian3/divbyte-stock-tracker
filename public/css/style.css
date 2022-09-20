@@ -27,6 +27,10 @@ a:hover {
   color:#74c69d;
 }
 
+ul {
+  list-style: none;
+}
+
 
 /* FONTS*/
 @font-face {
@@ -51,6 +55,11 @@ a:hover {
   text-align: center;
 }
 
+.sm-txt {
+  font-size: 0.9em;
+  color: #777;
+}
+
 .h1-large {
   font-size: 6rem;
 }
@@ -58,6 +67,8 @@ a:hover {
 .p-large {
   font-size: 3rem;
 }
+
+
  
 /* LAYOUT */
 .vh-stretch {
@@ -136,6 +147,16 @@ a:hover {
 .light-shadow {
   box-shadow: 0px 1px 8px 2px rgba(0, 0, 0, 0.1);
 }
+
+/* TABLES */
+.normal-cell {
+  width: 12%;
+}
+
+.wide-cell {
+  width: 16%;
+}
+
 
 /*  COLOR */
 .white {

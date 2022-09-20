@@ -8,23 +8,27 @@
   <title>Document</title>
 </head>
 <body>
-  <% if(typeof errors != 'undefined') {%>
-    <% errors.forEach(function(error) { %>
-     <%= error.message %>
-    <% }); %>
- <% } %>
- 
- <% if(success_message != '') { %>
-   <%= success_message %>
- <% } %>
- 
- <% if(error_message != '') { %>
-   <%= error_message %>
- <% } %>
- 
- <% if(error != '') { %>
-   <%= error %>
- <% } %>
+  <div class="errors text-ct">
+
+    <% if(typeof errors != 'undefined') {%>
+      <% errors.forEach(function(error) { %>
+       <%= error.message %>
+      <% }); %>
+   <% } %>
+   
+   <% if(success_message != '') { %>
+     <%= success_message %>
+   <% } %>
+   
+   <% if(error_message != '') { %>
+     <%= error_message %>
+   <% } %>
+   
+   <% if(error != '') { %>
+     <%= error %>
+   <% } %>
+
+  </div>
 </body>
 </html>
 

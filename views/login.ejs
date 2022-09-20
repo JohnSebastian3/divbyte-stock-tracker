@@ -1,28 +1,55 @@
-<h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h1>
-<%- include ('./partials/messages') %>
-      <form action="/login" method="POST">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            placeholder="Enter Email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Enter Password"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
-      </form>
-      <p class="lead mt-4">
-        No Account? <a href="/register">Register</a>
-      </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/login.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container auto-margin flex gap-lg dir-col justify-ct vh-stretch">
+
+    
+    <!-- <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h1> -->
+    <div class="box-sm auto-margin flex justify-ar align-ct dir-col white light-shadow">
+      
+      <div>
+        <h1 id="heading-main" class="weight-b text-ct h1-large">Sign in</h1>
+  
+      </div>
+      <%- include ('./partials/messages') %>
+            <form action="/login" method="POST" id="register">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Enter Email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Enter Password"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-stretch">Login</button>
+            </form>
+            <p class="lead mt-4">
+              No Account? <a href="/">Register here</a>
+            </p>
+  
+  
+    </div>
+  </div>
+</body>
+</html>

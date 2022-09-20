@@ -16,25 +16,18 @@ module.exports = {
       failureFlash: true,
     })(req, res, next);
   },
-  getRegister: (req, res) => {
-    // res.render('login.ejs', req);
-    if(req.user) {
-      return res.redirect('/dashboard');
-    }
-    res.render('register');
-  },
   postRegister: async (req, res) => {
     const { name, email, password, password2 } = req.body;
     let errors = [];
   
     // Check required fields
     if(!name || !email || !password || !password2) {
-      errors.push({ message: 'Please fill in all fields' });
+      errors.push({ message: 'Please fill in all fields, ' });
     }
   
     // Check that passwords match
     if(password !== password2) {
-      errors.push({ message: 'Passwords do not match' });
+      errors.push({ message: 'Passwords do not match, ' });
     }
   
     // Check password length
@@ -43,7 +36,7 @@ module.exports = {
     }
   
     if(errors.length > 0) {
-      res.render('register.ejs', {
+      res.render('welcome', {
         errors,
         name, 
         email,
@@ -57,7 +50,7 @@ module.exports = {
         // User already exists
         errors.push({ message: 'Email is already in use' })
   
-        res.render('register.ejs', {
+        res.render('welcome', {
           errors,
           name, 
           email,

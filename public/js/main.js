@@ -4,6 +4,19 @@ const sharesInput = document.querySelector('#shares');
 const basisInput = document.querySelector('#basis');
 const errorElement = document.querySelector('#error');
 
+const addButton = document.querySelector('#addButton');
+addButton.addEventListener('click', () => {
+  modalContainer.classList.add('show');
+});
+
+const modalContainer = document.querySelector('.modal-container');
+
+const addStockButton = document.querySelector('#close');
+addStockButton.addEventListener('click', () => {
+  modalContainer.classList.remove('show');
+});
+
+
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
   let messages = [];
@@ -23,7 +36,6 @@ form.addEventListener('submit', async function(e) {
     form.submit();
   }
 
-
 })
 
 const deleteButtons = document.querySelectorAll('.deleteButton');
@@ -34,11 +46,12 @@ let totalValue = 0;
 let annualDividend = 0;
 
 async function getStockData() {
-  let stockList = document.querySelectorAll('.stock');
+  let stockList = document.querySelectorAll('.row');
   for(let i = 0; i < stockList.length; i++) {
-    let ticker = stockList[i].children[0].innerText.slice(8);
-    let shares = Number(stockList[i].children[1].innerText.slice(7));
-    let avgCost = Number(stockList[i].children[2].innerText.slice(8));
+    let ticker = stockList[i].cells[0].childNodes[1].innerText; 
+    let shares = Number(stockList[i].cells[1].innerText);
+    let avgCost = Number(stockList[i].cells[2].innerText.slice(1));
+   
     console.log(ticker);
     console.log(shares);
     console.log(avgCost);
@@ -56,24 +69,35 @@ async function getStockData() {
       console.log('Current stock quote', stockQuote);
       const change = stockQuote[0].change;
       console.log(change);
-      const priceChange =  document.createElement('span')
-      priceChange.innerText = `Change: $${change.toFixed(2)} (${(stockQuote[0].changesPercentage).toFixed(2)}%)`;
-      stockList[i].append(priceChange);
+      const changeCell = stockList[i].childNodes[7];
+      changeCell.innerText = `$${change.toFixed(2)} (${(stockQuote[0].changesPercentage).toFixed(2)}%)`;
+
+
+      const stockName = stockQuote[0].name;
+      const nameSpan = document.createElement('span');
+      nameSpan.classList.add('sm-txt');
+      nameSpan.innerText = stockName;
+
+      // Add name of company to first cell of every row
+      // right under the ticker symbol
+      stockList[i].cells[0].childNodes[3].append(nameSpan);
 
       totalValue += shares * (stockQuote[0].price);
-      const currentPrice = document.createElement('span')
-      currentPrice.innerText = ` Current Price: $${(stockQuote[0].price).toFixed(2)}`;
-      stockList[i].append(currentPrice);
-      const profitLoss = document.createElement('span')
-      profitLoss.innerText = ` Proft/Loss: $${((shares * stockQuote[0].price) - (shares * avgCost)).toFixed(2)}`;
-      stockList[i].append(profitLoss);
+   
+      const priceCell = stockList[i].childNodes[9];
+      priceCell.innerText = `$${(stockQuote[0].price).toFixed(2)}`;
+
+      const profitLossCell = stockList[i].childNodes[11];
+      profitLossCell.innerText = `$${((shares * stockQuote[0].price) - (shares * avgCost)).toFixed(2)}`;
+
 
       annualDividend += shares * historicDividends.historical[0].dividend * 4; // quarterly for now, will add algo to change this soon
       const dividendYield = ((historicDividends.historical[0].dividend * 4 / stockQuote[0].price) * 100).toFixed(2)
       console.log(`DIVIDEND YIELD: %${dividendYield}`);
-      const dividend = document.createElement('span')
-      dividend.innerText = ` Dividend: ${dividendYield}%`;
-      stockList[i].append(dividend);
+ 
+      const dividendCell = stockList[i].childNodes[13];
+      dividendCell.innerText = `${dividendYield}%`;
+
 
   
     } catch(err) {
@@ -112,7 +136,7 @@ function calculateRealTime() {
 
 async function deleteStock() {
   console.log('reached!');
-  const stockId = this.parentNode.dataset.id;
+  const stockId = this.parentNode.parentNode.dataset.id;
   try {
     const res = await fetch('dashboard/deleteStock', {
       method: 'delete',

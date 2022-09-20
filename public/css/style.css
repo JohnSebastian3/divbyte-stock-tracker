@@ -1,4 +1,166 @@
+/* BASE */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
+/* GENERAL */
 body {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family:'IBM Plex';
+  background-color: #efefef;
+  color: #212529;
+  font-size: 2rem;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color:#52b788;
+}
+
+a:hover {
+  color:#74c69d;
+}
+
+
+/* FONTS*/
+@font-face {
+  font-family: IBM Plex;
+  src: url(fonts/IBMPlexSans-Regular.ttf);
+}
+@font-face {
+  font-family: IBM Plex Bold;
+  src: url(fonts/IBMPlexSans-Bold.ttf);
+}
+@font-face {
+  font-family: IBM Plex Semi-Bold;
+  src: url(fonts/IBMPlexSans-SemiBold.ttf);
+}
+
+.weight-b {
+  font-weight: bold;
+}
+
+/* TEXT */
+.text-ct {
+  text-align: center;
+}
+
+.h1-large {
+  font-size: 6rem;
+}
+
+.p-large {
+  font-size: 3rem;
+}
+ 
+/* LAYOUT */
+.vh-stretch {
+  height: 100vh;
+}
+
+.w-stretch {
+  width: 100%;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.box-md {
+  width: 600px;
+  height: 600px;
+  border-radius: 2%;
+}
+
+.box-sm {
+  width: 475px;
+  height: 475px;
+  border-radius: 2%;
+}
+
+.auto-margin {
+  margin: 0 auto;
+}
+
+.errors {
+  margin: -30px 0px;
+  width: 80%;
+  color: #e5383b;
+}
+
+
+
+/* FLEX */
+
+.flex {
+  display: flex;
+}
+
+.dir-col {
+  flex-direction: column;
+}
+
+.align-ct {
+  align-items: center;
+}
+
+.justify-ct {
+  justify-content: center;
+}
+
+.justify-ar{
+  justify-content: space-around;
+}
+
+.gap-sm {
+  gap: 2rem;
+}
+
+.gap-m {
+  gap: 5rem;
+}
+
+.gap-lg {
+  gap: 10rem;
+}
+
+
+/* STYLE */
+.light-shadow {
+  box-shadow: 0px 1px 8px 2px rgba(0, 0, 0, 0.1);
+}
+
+/*  COLOR */
+.white {
+  background-color: #fdfdfd;
+}
+
+/* BUTTONS */
+.btn {
+  border: none;
+  cursor: pointer;
+  padding: 1.2rem 2.4rem;
+  border-radius: 10px;
+}
+
+.btn-primary {
+  background-color: #52b788;
+  color: #fff;
+  transition: background-color 200ms;
+}
+
+.btn-primary:hover {
+  background-color: #74c69d;
+  
+}
+
+.btn-transparent {
+  background-color: transparent;
 }

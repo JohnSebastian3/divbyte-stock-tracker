@@ -1,0 +1,16 @@
+
+#heading-main {
+  font-family: 'IBM Plex Semi-Bold';
+}
+
+#register {
+  width: 85%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+

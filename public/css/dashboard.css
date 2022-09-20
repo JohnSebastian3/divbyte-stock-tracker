@@ -1,0 +1,103 @@
+.hidden {
+  visibility: hidden;
+}
+
+.modal-container {
+  background-color: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.modal-container.show {
+  opacity: 1; 
+  pointer-events: auto;
+}
+
+.modal {
+  background-color: #fdfdfd;
+  width: 600px;
+  max-width: 100%;
+  padding: 30px 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.modal h3 {
+  font-size: 2.6rem;
+  margin-bottom: 4rem;
+  margin: 0;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.modal input {
+  margin-bottom: 2rem;
+}
+
+#close-modal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+#close {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+#close:hover {
+  color: #52b788;
+}
+
+
+/* TABLE */
+#stockTable {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #fefefe;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px 3px rgba(0,0,0,0.15);
+  margin: 25px auto;
+  font-size: 0.85em;
+  min-width: 600px;
+}
+
+#stockTable thead tr {
+  background-color: #40916c;
+  color: #fefefe;
+  text-align: left;
+  font-weight: bold;
+}
+
+#stockTable thead tr td {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+#stockTable th,
+#stockTable td {
+  padding: 12px 15px;
+}
+
+#stockTable tbody tr {
+  border-bottom: 1px solid lightgray;
+}
+
+#stockTable tbody tr:nth-last-of-type(odd) {
+  background-color: #f0f0f0;
+}

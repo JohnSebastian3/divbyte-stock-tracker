@@ -68,7 +68,7 @@
 #stockTable {
   border-collapse: collapse;
   width: 100%;
-  background-color: #fefefe;
+  background-color: #fafafa;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 5px 1px rgba(0,0,0,0.1);
@@ -78,7 +78,8 @@
 }
 
 #stockTable thead tr {
-  background-color: rgba(74, 159, 121, 0.9);
+  /* background-color: rgba(74, 159, 121, 0.9); */
+  background-color: rgba(34,34,34,0.9);
   color: #fefefe;
   text-align: left;
   font-weight: bold;
@@ -99,5 +100,5 @@
 }
 
 #stockTable tbody tr:nth-last-of-type(odd) {
-  background-color: #f0f0f0;
+  background-color: #fafafa;
 }

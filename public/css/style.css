@@ -8,8 +8,8 @@
 /* GENERAL */
 body {
   font-family:'IBM Plex';
-  background-color: #efefef;
-  color: #212529;
+  background-color: #fafafa;
+  color: #222;
   font-size: 2rem;
 }
 
@@ -19,12 +19,14 @@ html {
 }
 
 a {
-  text-decoration: none;
-  color:#52b788;
+  /* text-decoration: none; */
+  /* color:#52b788; */
+  color: #222;
 }
 
 a:hover {
-  color:#74c69d;
+  /* color:#74c69d; */
+  color: #888;
 }
 
 ul {
@@ -160,7 +162,7 @@ ul {
 
 /*  COLOR */
 .white {
-  background-color: #fdfdfd;
+  background-color: #fafafa;
 }
 
 /* BUTTONS */
@@ -171,26 +173,37 @@ ul {
   border-radius: 6px;
 }
 
+.border-bl {
+  border: 5px solid rgba(34, 34, 34, 0.75);
+}
+
 .btn-primary {
-  background-color: #52b788;
-  color: #fff;
+  /* background-color: #52b788; */
+  background-color: rgba(34,34,34,0.9);;
+  border: 3px solid rgba(34,34,34,0.9);;
+  color: #fafafa;
   transition: background-color 200ms;
 }
 
 .btn-primary:hover {
-  background-color: #74c69d;
+  /* background-color: #74c69d; */
+  background-color: #fafafa;
+  color:rgba(34,34,34,0.9);;
+  border: 3px solid black;
   
 }
 
 .btn-secondary {
   background-color: transparent;
-  border: 2px solid #52b788;
+  /* border: 2px solid #52b788; */
+  border: 2px solid rgba(34,34,34,0.9);;
   transition: background-color 200ms color 200ms;
 }
 
 .btn-secondary:hover {
-  background-color: #52b788;
-  color: #fff;
+  /* background-color: #52b788; */
+  background-color: rgba(34,34,34,0.9);;
+  color: #fafafa;
 }
 
 .btn-transparent {

@@ -102,3 +102,16 @@
 #stockTable tbody tr:nth-last-of-type(odd) {
   background-color: #fafafa;
 }
+
+
+/* STATISTICS */
+#statistics {
+  border: 2px solid rgba(34,34,34,0.1);
+  padding: 2rem 1rem;
+  border-radius: 20px;
+  margin: 4rem auto;
+}
+
+#statistics h2 {
+  margin-bottom: 1rem;
+}

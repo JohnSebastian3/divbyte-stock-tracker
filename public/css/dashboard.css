@@ -71,14 +71,14 @@
   background-color: #fefefe;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 15px 3px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 5px 1px rgba(0,0,0,0.1);
   margin: 25px auto;
   font-size: 0.85em;
   min-width: 600px;
 }
 
 #stockTable thead tr {
-  background-color: #40916c;
+  background-color: rgba(74, 159, 121, 0.9);
   color: #fefefe;
   text-align: left;
   font-weight: bold;

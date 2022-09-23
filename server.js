@@ -8,6 +8,8 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const connectDB = require('./config/db');
 const dashboardRoutes = require('./routes/dashboard');
+const indexRoutes = require('./routes/index');
+const stockRoutes = require('./routes/stock');
 
 require('dotenv').config({path: './config/.env'});
 
@@ -57,8 +59,9 @@ app.use((req, res, next) => {
 
 
 // Routes
-app.use('/', require('./routes/index'));
+app.use('/', indexRoutes);
 app.use('/dashboard', dashboardRoutes);
+app.use('/stock', stockRoutes);
 
 
 app.listen(process.env.PORT, () => {

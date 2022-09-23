@@ -70,17 +70,17 @@
         <tr class="row" data-id="<%= stocks[i]._id%>">
           <td id="stockName">
             <div id="symbol">
-              <%= stocks[i].ticker %> 
+              <a href="/stock/<%= stocks[i].ticker %>" ><%= stocks[i].ticker %></a> 
             </div>
             <div id="corporation">
 
             </div>
           </td>
           <td>
-            <%= stocks[i].shares %> 
+            <%= stocks[i].shares.toLocaleString('en-US') %> 
           </td>
           <td>
-            $<%= stocks[i].basis %> 
+            $<%= stocks[i].basis.toLocaleString('en-US') %> 
           </td>
           <td></td>
           <td></td>
@@ -102,7 +102,7 @@
     
   <div id="statistics">
 
-    <h2>Portfolio Value: $<span class="totalValue">0</span></h2>
+    <h2>Portfolio Value: $<span class="currentValue">0</span> <span class="netProfit"></span></h2>
     <h2>Yearly Dividend Income: $<span class="yearlyDividend">0</span> a year</h2>
     <h2>Real time: $<span class="realTime"></span></h2>
 

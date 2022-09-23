@@ -11,7 +11,12 @@ module.exports = {
   },
   addStock: async (req, res) => {
     try {
-      await Stock.create({ticker: req.body.ticker, shares: req.body.shares, basis: req.body.basis, userId: req.user.id});
+      await Stock.create({
+        ticker: req.body.ticker, 
+        shares: req.body.shares, 
+        basis: req.body.basis, 
+        userId: req.user.id
+      });
       console.log('Stock has been added!');
       res.redirect('/dashboard');
     } catch(err) {

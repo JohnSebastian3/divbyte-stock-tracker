@@ -77,6 +77,14 @@ input {
   font-size: 3rem;
 }
 
+.txt-red {
+  color: #eb2a2a;
+}
+
+.txt-green {
+  color:#52b788;
+}
+
 
  
 /* LAYOUT */

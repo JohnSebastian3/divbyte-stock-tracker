@@ -135,14 +135,9 @@ async function getStockData() {
     document.querySelector('.yearlyDividend').innerText = Number(annualDividend.toFixed(2)).toLocaleString('en-US');
     document.querySelector('.currentValue').innerText = Number(currentValue.toFixed(2)).toLocaleString('en-US');
     if(totalProfitLoss > 0) {
-      document.querySelector('.netProfit').classList.remove('txt-red');
       document.querySelector('.netProfit').classList.add('txt-green');
     } else if(totalProfitLoss < 0) {
-      document.querySelector('.netProfit').classList.remove('txt-green');
       document.querySelector('.netProfit').classList.add('txt-red');
-    } else {
-      document.querySelector('netProfit').classList.remove('txt-green');
-      document.querySelector('netProfit').classList.remove('txt-red');
     }
     document.querySelector('.netProfit').innerText = `(${(totalProfitLoss > 0 ? '+' : '')}${Number(totalProfitLoss.toFixed(2)).toLocaleString('en-US')})`;
   }

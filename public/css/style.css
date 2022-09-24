@@ -5,6 +5,10 @@
   margin: 0;
 }
 
+.test-image {
+  width: 200px;
+}
+
 /* GENERAL */
 body {
   font-family:'IBM Plex';

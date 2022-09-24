@@ -12,7 +12,7 @@ module.exports = {
           }
         }
       )
-      console.log("QUOTE:", dividendInfo.data);
+      // console.log("QUOTE:", dividendInfo.data);
       let freq;
       
       if(Object.keys(dividendInfo.data).length > 0 && dividendInfo.data.historical[0].dividend != 0) {
@@ -32,15 +32,14 @@ module.exports = {
         }
   
         let diff = Math.abs(firstMonth - secondMonth);
-  
-        if(diff % 1 === 0) {
-          freq = 'Monthly';
-        } else if(diff % 3 === 0) {
-          freq = 'Quarterly';
-        } else if (diff % 6 === 0) {
-          freq = 'Semi-Annual';
-        } else if(diff % 12 === 0) {
+        if(diff % 12 === 0) {
           freq = 'Annual';
+        } else if(diff % 6 === 0) {
+          freq = 'Semi-Annual';
+        } else if (diff % 3 === 0) {
+          freq = 'Quarterly';
+        } else if(diff % 1 === 0) {
+          freq = 'Monthly';
         }
       
       }

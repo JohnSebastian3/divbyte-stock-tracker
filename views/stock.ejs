@@ -8,13 +8,14 @@
   <title>Stock</title>
 </head>
   <body>
-    <h1>Het tuyehre!</h1>
     <% if(profile.image)  { %> 
       <img src="<%= profile.image %> " class="test-image" />
     <% } %> 
-    <h2><%= profile.companyName %> </h2>
+    <h2><%= profile.companyName %> (<%= ticker %> )</h2>
     <h4>$<%= (profile.price).toLocaleString('en-US') %> </h4>
     <span>$<%= (profile.changes).toLocaleString('en-US') %> </span>
+    <h4>Dividend Yield: <span><%= divYield %>% </span></h4>
+    <h4>Last Dividend Payout: $<%= divPayout %> </h4>
     <p>
       <% if(payoutFreq) { %> 
         <%= payoutFreq %> Dividend
@@ -23,6 +24,7 @@
 
     <p>
       <% if(profile.description) { %> 
+        <h4>Description</h4>
         <%= profile.description %> 
       <% } %> 
     </p>

@@ -2,7 +2,6 @@ const axios = require("axios");
 
 module.exports = {
   getStock: async (req, res) => {
-    console.log(req.params.ticker);
     try {
       const dividendInfo = await axios.get(
         `https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/${req.params.ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`,
@@ -17,7 +16,6 @@ module.exports = {
         `https://financialmodelingprep.com/api/v3/profile/${req.params.ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`,
       )
 
-      console.log(dividendInfo.data.historical[0]);
       // console.log("QUOTE:", dividendInfo.data);
       let freq;
       let dividendYield;

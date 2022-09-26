@@ -1,28 +1,55 @@
-const form = document.querySelector('form');
-const tickerInput = document.querySelector('#ticker');
-const sharesInput = document.querySelector('#shares');
-const basisInput = document.querySelector('#basis');
+const formAdd= document.querySelector('#form-add');
+const formEdit = document.querySelector('#form-edit')
+const tickerAdd = document.querySelector('#ticker-add');
+const sharesAdd= document.querySelector('#shares-add');
+const basisAdd = document.querySelector('#basis-add');
+const tickerEdit = document.querySelector('#ticker-edit');
+const sharesEdit = document.querySelector('#shares-edit');
+const basisEdit = document.querySelector('#basis-edit');
 const errorElement = document.querySelector('#error');
+
+console.log('form edit', formEdit);
+
+const modalContainerAdd = document.querySelector('.modal-container-add');
+const modalContainerEdit = document.querySelector('.modal-container-edit');
 
 const addButton = document.querySelector('#addButton');
 addButton.addEventListener('click', () => {
-  modalContainer.classList.add('show');
-});
-
-const modalContainer = document.querySelector('.modal-container');
-
-const addStockButton = document.querySelector('#close');
-addStockButton.addEventListener('click', () => {
-  modalContainer.classList.remove('show');
+  modalContainerAdd.classList.add('show');
 });
 
 
-form.addEventListener('submit', async function(e) {
+const closeButtons = document.querySelectorAll('.close');
+closeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+  modalContainerAdd.classList.remove('show');
+  modalContainerEdit.classList.remove('show');
+  })
+})
+  
+const editStockButtons = document.querySelectorAll('.edit-stock');
+editStockButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    modalContainerEdit.classList.add('show');
+    const id = button.attributes['data-id'].textContent;
+    const ticker = button.parentNode.parentNode.parentNode.childNodes[1].childNodes[1].innerText;
+    const shares = Number(button.parentNode.parentNode.parentNode.childNodes[3].innerText);
+    const basis = Number(button.parentNode.parentNode.parentNode.childNodes[5].innerText.slice(1));
+    
+    tickerEdit.value = ticker;
+    sharesEdit.value = shares;
+    basisEdit.value = basis;
+    formEdit.action = `/dashboard/editStock/${id}?_method=PUT`;
+  })
+})
+
+
+formAdd.addEventListener('submit', async function(e) {
   e.preventDefault();
   let messages = [];
 
   const quoteResponse = await fetch(
-    `https://financialmodelingprep.com/api/v3/quote/${tickerInput.value}?apikey=ac08be8670bfbfba904e1e17d7596342`
+    `https://financialmodelingprep.com/api/v3/quote/${tickerAdd.value}?apikey=ac08be8670bfbfba904e1e17d7596342`
   )
   const stockQuote = await quoteResponse.json();
  
@@ -33,15 +60,12 @@ form.addEventListener('submit', async function(e) {
   errorElement.innerText = messages.join(', ');
 
   if(messages.length === 0) {
-    form.submit();
+    formAdd.submit();
   }
 
 })
 
-const deleteButtons = document.querySelectorAll('.deleteButton');
-Array.from(deleteButtons).forEach(button => {
-  button.addEventListener('click', deleteStock);
-})
+
 let currentValue = 0;
 let annualDividend = 0;
 let totalProfitLoss = 0;
@@ -61,8 +85,7 @@ async function getStockData() {
       const divResponse = await fetch(
         `https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`);
       const historicDividends = await divResponse.json();
-      
-      console.log("DEBUG TNBIS:", historicDividends);
+    
 
       const quoteResponse = await fetch(
         `https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`
@@ -135,8 +158,10 @@ async function getStockData() {
     document.querySelector('.yearlyDividend').innerText = Number(annualDividend.toFixed(2)).toLocaleString('en-US');
     document.querySelector('.currentValue').innerText = Number(currentValue.toFixed(2)).toLocaleString('en-US');
     if(totalProfitLoss > 0) {
+      document.querySelector('.netProfit').classList.remove('txt-red');
       document.querySelector('.netProfit').classList.add('txt-green');
     } else if(totalProfitLoss < 0) {
+      document.querySelector('.netProfit').classList.remove('txt-green');
       document.querySelector('.netProfit').classList.add('txt-red');
     }
     document.querySelector('.netProfit').innerText = `(${(totalProfitLoss > 0 ? '+' : '')}${Number(totalProfitLoss.toFixed(2)).toLocaleString('en-US')})`;
@@ -168,25 +193,6 @@ function calculateRealTime() {
   }, 500)
 }
 
-async function deleteStock() {
-  console.log('reached!');
-  const stockId = this.parentNode.parentNode.dataset.id;
-  try {
-    const res = await fetch('dashboard/deleteStock', {
-      method: 'delete',
-      headers: {'Content-type': 'application/json'},
-      body: JSON.stringify({
-        'stockIdFromJSFile': stockId,
-      })
-    })
-    const data = await res.json();
-    console.log(data);
-    console.log('deleted');
-    location.reload();
-  } catch(err) {
-    console.log(err);
-  }
-}
 
 // getCurrentPrice();
 // getDividend();

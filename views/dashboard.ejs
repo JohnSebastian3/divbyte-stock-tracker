@@ -8,11 +8,17 @@
   <title>Document</title>
 </head>
 <body>
-  <h2><%= user.name %>'s Portfolio</h2>
 
-  
-  <h1>$<span class="currentValue">0</span> <span class="netProfit"></span></h2>
-  <button id="addButton" class="btn btn-secondary">+ New</button>
+  <div class="dash-container">
+
+    <h2><%= user.name %>'s Portfolio</h2>
+
+  <div class="dash-header">
+
+    <h1>$<span class="currentValue">0</span> <span class="netProfit"></span></h2>
+    <button id="addButton" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
+
+  </div>
   <div id="statistics">
 
     <h2>Annual Income: $<span class="yearlyDividend">0</span></h2>
@@ -139,5 +145,8 @@
   
   <a href="/logout" class="">Logout</a>
     <script src="js/main.js"></script>
+
+  </div>
+  
   </body>
 </html>

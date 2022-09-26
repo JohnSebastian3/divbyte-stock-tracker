@@ -8,10 +8,19 @@
   <title>Document</title>
 </head>
 <body>
-  <h1><%= user.name %>'s Portfolio</h1>
+  <h2><%= user.name %>'s Portfolio</h2>
+
   
+  <h1>$<span class="currentValue">0</span> <span class="netProfit"></span></h2>
   <button id="addButton" class="btn btn-secondary">+ New</button>
-  <div id="error"></div>
+  <div id="statistics">
+
+    <h2>Annual Income: $<span class="yearlyDividend">0</span></h2>
+    <h2>Real time: $<span class="realTime"></span></h2>
+
+  </div>
+  
+  
 
   <div  class="modal-container-add">
     <div class="modal">
@@ -20,6 +29,7 @@
         <span class="close">ⓧ</span>
       </div>
       <form action="/dashboard/addStock" id="form-add" method="POST">
+        <div id="error"></div>
         <label for="ticker">Ticker</label>
         <input type="text" name="ticker" id="ticker-add" placeholder="ex. AAPL" required>
         <label for="shares">Number of Shares</label>
@@ -38,6 +48,7 @@
         <span class="close">ⓧ</span>
       </div>
       <form id="form-edit" method="POST">
+        <div id="error"></div>
         <label for="ticker">Ticker</label>
         <input type="text" name="ticker" id="ticker-edit" required>
         <label for="shares">Number of Shares</label>
@@ -126,17 +137,6 @@
     </tbody>
   </table>
   
-  <ul>
-    
-  </ul>
-    
-  <div id="statistics">
-
-    <h2>Portfolio Value: $<span class="currentValue">0</span> <span class="netProfit"></span></h2>
-    <h2>Yearly Dividend Income: $<span class="yearlyDividend">0</span></h2>
-    <h2>Real time: $<span class="realTime"></span></h2>
-
-  </div>
   <a href="/logout" class="">Logout</a>
     <script src="js/main.js"></script>
   </body>

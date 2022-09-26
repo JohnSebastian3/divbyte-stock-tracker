@@ -24,7 +24,7 @@ module.exports = {
       
       if(Object.keys(dividendInfo.data).length > 0 && dividendInfo.data.historical[0].dividend != 0) {
         let firstMonth = dividendInfo.data.historical[0].paymentDate.slice(5, 7);
-        if(Number(firstMonth) < 10) {
+        if(Number(firstMonth) < 10) { 
           firstMonth = Number(firstMonth.slice(1));
         } else {
           firstMonth = Number(firstMonth);

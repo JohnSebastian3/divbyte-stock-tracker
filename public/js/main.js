@@ -164,7 +164,7 @@ async function getStockData() {
       document.querySelector('.netProfit').classList.remove('txt-green');
       document.querySelector('.netProfit').classList.add('txt-red');
     }
-    document.querySelector('.netProfit').innerText = `(${(totalProfitLoss > 0 ? '+' : '')}${Number(totalProfitLoss.toFixed(2)).toLocaleString('en-US')})`;
+    document.querySelector('.netProfit').innerText = `${(totalProfitLoss > 0 ? '+' : '')}${Number(totalProfitLoss.toFixed(2)).toLocaleString('en-US')}`;
   }
   calculateRealTime();
 }

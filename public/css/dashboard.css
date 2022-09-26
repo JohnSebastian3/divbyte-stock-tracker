@@ -2,7 +2,8 @@
   visibility: hidden;
 }
 
-.modal-container {
+.modal-container-add,
+.modal-container-edit {
   background-color: rgba(0,0,0,0.3);
   display: flex;
   justify-content: center;
@@ -17,7 +18,8 @@
   transition: opacity 200ms ease;
 }
 
-.modal-container.show {
+.modal-container-add.show,
+.modal-container-edit.show {
   opacity: 1; 
   pointer-events: auto;
 }
@@ -47,19 +49,19 @@
   margin-bottom: 2rem;
 }
 
-#close-modal {
+.close-modal {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 4rem;
 }
 
-#close {
+.close {
   cursor: pointer;
   transition: color 200ms;
 }
 
-#close:hover {
+.close:hover {
   color: #52b788;
 }
 

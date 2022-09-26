@@ -31,6 +31,7 @@ a {
 a:hover {
   /* color:#74c69d; */
   color: #888;
+  transition: color 200ms;
 }
 
 ul {
@@ -190,6 +191,7 @@ input {
   cursor: pointer;
   padding: 1.2rem 2.4rem;
   border-radius: 6px;
+  transition: color 200ms, background-color 200ms;
 }
 
 .border-bl {
@@ -216,15 +218,43 @@ input {
   background-color: transparent;
   /* border: 2px solid #52b788; */
   border: 2px solid rgba(34,34,34,0.9);;
-  transition: background-color 200ms color 200ms;
+  transition: background-color 200ms, color 200ms;
 }
 
 .btn-secondary:hover {
   /* background-color: #52b788; */
-  background-color: rgba(34,34,34,0.9);;
+  background-color: rgba(34,34,34,0.9);
   color: #fafafa;
 }
 
 .btn-transparent {
   background-color: transparent;
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.deleteButton,
+.editButton,
+.new-transaction {
+ font-size: 2rem;
+ border: none;
+ cursor: pointer;
+ outline: none;
+ transition: color 200ms;
+}
+
+.deleteButton {
+  color: #eb2a2a;
+}
+
+.deleteButton:hover {
+  color: #f57878;
+}
+
+.editButton:hover {
+  color: #888;
 }

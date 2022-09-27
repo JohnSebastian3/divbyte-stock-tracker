@@ -77,10 +77,7 @@ async function getStockData() {
     let shares = Number((stockList[i].cells[1].innerText).replaceAll(',', ''));
     let avgCost = Number(stockList[i].cells[2].innerText.slice(1).replaceAll(',', ''));
     
-   
-    // console.log(ticker);
-    // console.log(shares);
-    // console.log(avgCost);
+
     try {
       const divResponse = await fetch(
         `https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`);
@@ -97,7 +94,7 @@ async function getStockData() {
       console.log('Current stock quote', stockQuote);
       const change = stockQuote[0].change;
       const changesPercentage = stockQuote[0].changesPercentage;
-      console.log(change);
+
 
       const spanChange = document.createElement('span');
       const spanPercentage = document.createElement('span');
@@ -126,14 +123,21 @@ async function getStockData() {
       currentValue += shares * (stockQuote[0].price);
    
       const priceCell = stockList[i].childNodes[9];
-      const price = (stockQuote[0].price).toFixed(2);
-      priceCell.innerText = `$${Number(price).toLocaleString('en-US')}`;
+      const price = (stockQuote[0].price);
+      console.log("CURRURURU:",price);
+      priceCell.innerText = `$${Number(price).toLocaleString('en-US', {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2
+      })}`;
 
       const profitLossCell = stockList[i].childNodes[11];
-      const profitTotal = ((shares * stockQuote[0].price) - (shares * avgCost)).toFixed(2);
+      const profitTotal = ((shares * stockQuote[0].price) - (shares * avgCost));
       totalProfitLoss += Number(profitTotal);
       profitTotal < 0 ? profitLossCell.classList.add('txt-red') : profitLossCell.classList.add('txt-green');
-      profitLossCell.innerText = `$${Number(profitTotal).toLocaleString('en-US')}`;
+      profitLossCell.innerText = `$${Number(profitTotal).toLocaleString('en-US', {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2,
+      })}`;
       
 
      const dividendCell = stockList[i].childNodes[13];
@@ -141,7 +145,6 @@ async function getStockData() {
      if(Object.keys(historicDividends).length > 0 && historicDividends.historical[0].dividend != 0) {
        const dividendYield = ((historicDividends.historical[0].dividend * 4 / stockQuote[0].price) * 100).toFixed(2)
        annualDividend += shares * historicDividends.historical[0].dividend * 4; // quarterly for now, will add algo to change this soon
-       console.log(`DIVIDEND YIELD: ${dividendYield}%`);
        
        dividendCell.innerText = `${dividendYield}%`;
      } else {
@@ -155,8 +158,14 @@ async function getStockData() {
       console.log(err);
     }
     
-    document.querySelector('.yearlyDividend').innerText = Number(annualDividend.toFixed(2)).toLocaleString('en-US');
-    document.querySelector('.currentValue').innerText = Number(currentValue.toFixed(2)).toLocaleString('en-US');
+    document.querySelector('.yearlyDividend').innerText = annualDividend.toLocaleString('en-US', {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2
+    });
+    document.querySelector('.currentValue').innerText = currentValue.toLocaleString('en-US', {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+    });
     if(totalProfitLoss > 0) {
       document.querySelector('.netProfit').classList.remove('txt-red');
       document.querySelector('.netProfit').classList.add('txt-green');
@@ -167,6 +176,14 @@ async function getStockData() {
     document.querySelector('.netProfit').innerText = `${(totalProfitLoss > 0 ? '+' : '')}${Number(totalProfitLoss.toFixed(2)).toLocaleString('en-US')}`;
   }
   calculateRealTime();
+
+  getPortfolioYield(currentValue, annualDividend);
+}
+
+function getPortfolioYield(currentValue, annualDividend) {
+  const annualYield = (annualDividend / currentValue) * 100;
+
+  document.querySelector('.annual-yield').innerText = annualYield.toFixed(2);
 }
 
 
@@ -174,7 +191,6 @@ function calculateRealTime() {
   const dividend = document.querySelector('.yearlyDividend');
   const realTime = document.querySelector('.realTime');
   let currentValue = Number(document.querySelector('.currentValue').innerText.replaceAll(',', ''));
-  console.log(currentValue);
   const yearlyDividend = Number(dividend.innerText.replaceAll(',',''));
   const monthly = yearlyDividend / 12;
   const daily = yearlyDividend / 365;
@@ -197,3 +213,4 @@ function calculateRealTime() {
 // getCurrentPrice();
 // getDividend();
 getStockData();
+

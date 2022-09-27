@@ -5,7 +5,6 @@ module.exports = {
   getDashboard: async (req, res) => {
     try {
         const stockItems = await Stock.find({userId: req.user.id});
-        console.log(stockItems);
         res.render('dashboard.ejs', {stocks: stockItems, user: req.user});
     } catch(err) {
       console.log(err);

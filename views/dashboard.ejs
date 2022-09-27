@@ -21,8 +21,9 @@
   </div>
   <div id="statistics">
 
-    <h2>Annual Income: $<span class="yearlyDividend">0</span></h2>
-    <h2>Real time: $<span class="realTime"></span></h2>
+    <h3>Portfolio Yield: <span class="annual-yield"></span>%</h3>
+    <h3>Annual Income: $<span class="yearlyDividend">0</span></h3>
+    <h3>Real time: $<span class="realTime"></span></h3>
 
   </div>
   
@@ -108,10 +109,10 @@
             </div>
           </td>
           <td>
-            <%= stocks[i].shares.toLocaleString('en-US') %> 
+            <%= stocks[i].shares.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
           </td>
           <td>
-            $<%= stocks[i].basis.toLocaleString('en-US') %> 
+            $<%= stocks[i].basis.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
           </td>
           <td></td>
           <td></td>

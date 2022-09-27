@@ -119,6 +119,10 @@
   background-color: #fafafa;
 }
 
+.row {
+  height: 75px;
+}
+
 
 /* STATISTICS */
 #statistics {

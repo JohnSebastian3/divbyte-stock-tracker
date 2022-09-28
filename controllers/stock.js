@@ -4,19 +4,19 @@ module.exports = {
   getStock: async (req, res) => {
     try {
       const dividendInfo = await axios.get(
-        `https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/${req.params.ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`,
-        {
-          params: {
-            _limit: 2
-          }
-        }
+        `https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/${req.params.ticker}?&apikey=ac08be8670bfbfba904e1e17d7596342`
       )
 
       const profile = await axios.get(
         `https://financialmodelingprep.com/api/v3/profile/${req.params.ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`,
       )
 
-      // console.log("QUOTE:", dividendInfo.data);
+      const metrics = await axios.get(
+        `https://financialmodelingprep.com/api/v3/key-metrics-ttm/${req.params.ticker}?limit=40&apikey=ac08be8670bfbfba904e1e17d7596342`
+        )
+
+      
+
       let freq;
       let dividendYield;
       
@@ -53,13 +53,31 @@ module.exports = {
         }
       }
 
-      
+      dividendYield = dividendYield.toLocaleString('en-US', {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2
+      })
+
+      const keyMetrics = {
+        sector: profile.data[0].sector,
+        industry: profile.data[0].industry,
+        beta: profile.data[0].beta,
+        website: profile.data[0].website,
+        marketCap: profile.data[0].mktCap,
+        peRatioTTM: metrics.data[0].peRatioTTM,
+        dividendYieldTTM: metrics.data[0].dividendYieldPercentageTTM,
+        payoutRatioTTM: metrics.data[0].payoutRatioTTM,
+        divPerShareTTM: metrics.data[0].dividendPerShareTTM,
+      }
+
+
       // console.log("PROFILE:",profile.data);
       res.render('stock.ejs', {profile: profile.data[0], 
         payoutFreq: freq, 
         ticker: req.params.ticker, 
         divYield: dividendYield,
         divPayout: dividendInfo.data.historical[0].dividend,
+        metrics: keyMetrics,
       });
 
     }

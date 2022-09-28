@@ -4,7 +4,15 @@ const mongoose = require('mongoose');
 module.exports = {
   getDashboard: async (req, res) => {
     try {
+      // TODO: AXIOS to get all stocks to dashboard
         const stockItems = await Stock.find({userId: req.user.id});
+        let stockList;
+        for(let i = 0; i < stockItems.length; i++) {
+          
+        }
+
+
+
         res.render('dashboard.ejs', {stocks: stockItems, user: req.user});
     } catch(err) {
       console.log(err);

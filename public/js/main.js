@@ -33,7 +33,7 @@ editStockButtons.forEach(button => {
     modalContainerEdit.classList.add('show');
     const id = button.attributes['data-id'].textContent;
     const ticker = button.parentNode.parentNode.parentNode.childNodes[1].childNodes[1].innerText;
-    const shares = Number(button.parentNode.parentNode.parentNode.childNodes[3].innerText);
+    const shares = Number(button.parentNode.parentNode.parentNode.childNodes[3].innerText.replaceAll(',', ''));
     const basis = Number(button.parentNode.parentNode.parentNode.childNodes[5].innerText.slice(1));
     
     tickerEdit.value = ticker;

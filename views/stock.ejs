@@ -8,25 +8,93 @@
   <title>Stock</title>
 </head>
   <body>
-    <% if(profile.image)  { %> 
-      <img src="<%= profile.image %> " class="test-image" />
-    <% } %> 
-    <h2><%= profile.companyName %> (<%= ticker %> )</h2>
-    <h4>$<%= (profile.price).toLocaleString('en-US') %> </h4>
-    <span>$<%= (profile.changes).toLocaleString('en-US') %> </span>
-    <h4>Dividend Yield: <span><%= divYield %>% </span></h4>
-    <h4>Last Dividend Payout (per share): $<%= divPayout %> </h4>
-    <p>
-      <% if(payoutFreq) { %> 
-        <%= payoutFreq %> Dividend
-      <% } %> 
-    </p>
+    <div class="stock-container flex dir-col gap-m">
 
-    <p>
-      <% if(profile.description) { %> 
-        <h4>Description</h4>
-        <%= profile.description %> 
-      <% } %> 
-    </p>
+      <div class="info flex align-ct gap-m">
+        
+        <div class="main-image">
+          <% if(profile.image)  { %> 
+            <img src="<%= profile.image %> " class="ticker-image" />
+          <% } %> 
+
+        </div>
+        <div class="main-info">
+  
+          <h2><%= profile.companyName %></h2>
+          <h4>(<%= ticker %>)</h4>
+          <h4>$<%= (profile.price).toLocaleString('en-US') %> </h4>
+          <span>$<%= (profile.changes).toLocaleString('en-US') %> </span>
+  
+        </div>
+  
+        <div class="dividend-info">
+  
+          <h4>Dividend Yield: <span><%= divYield %>% </span></h4>
+          <h4>Last Dividend Payout (per share): <span>$<%= divPayout %></span></h4>
+          <div>
+            <h4>Dividend Frequency</h4>
+            <p>
+            <% if(payoutFreq) { %> 
+              <%= payoutFreq %>
+            <% } %> 
+          </p>
+            </div>
+  
+        </div>
+
+      </div>
+
+      <div class="key-metrics">
+        <ul>
+          <% if(metrics.sector) { %>
+              <li>Sector: <%= metrics.sector %> </li>
+            <% } %> 
+          <% if(metrics.industry) { %>
+            <li>Industry: <%= metrics.industry %> </li>
+          <% } %> 
+          <% if(metrics.beta) { %>
+            <li>Beta: <%= metrics.beta %> </li>
+          <% } %> 
+          <% if(metrics.marketCap) { %>
+            <li>Market Cap: <%= (metrics.marketCap).toLocaleString('en-US') %></li>
+          <% } %> 
+          <% if(metrics.peRatioTTM) { %>
+            <li>TTM PE Ratio: <%= (metrics.peRatioTTM).toLocaleString('en-US', {
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2
+            }) %> </li>
+          <% } %> 
+          <% if(metrics.dividendYieldTTM) { %>
+            <li>TTM Dividend Yield: <%= (metrics.dividendYieldTTM).toLocaleString('en-US', {
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2
+            }) %>% </li>
+          <% } %> 
+          <% if(metrics.payoutRatioTTM) { %>
+            <li>TTM Payout Ratio: <%= (metrics.payoutRatioTTM * 100).toLocaleString('en-US', {
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2
+            }) %>%</li>
+          <% } %> 
+          <% if(metrics.divPerShareTTM) { %>
+            <li>TTM Dividends Per Share: $<%= (metrics.divPerShareTTM).toLocaleString('en-US', {
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2
+            }) %></li>
+          <% } %> 
+          <% if(metrics.website) { %>
+            <li>Website: <a href="<%= metrics.website %>" target="_blank"><%= metrics.website %></a> </li>
+          <% } %> 
+          
+        </ul>
+      </div>
+  
+      <div class="description">
+        <% if(profile.description) { %> 
+          <%= profile.description %> 
+        <% } %> 
+      </div>
+
+    </div>
   </body>
 </html>

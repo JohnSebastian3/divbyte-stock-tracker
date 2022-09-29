@@ -5,9 +5,6 @@
   margin: 0;
 }
 
-.test-image {
-  width: 200px;
-}
 
 /* GENERAL */
 body {
@@ -15,6 +12,7 @@ body {
   background-color: #fafafa;
   color: #222;
   font-size: 2rem;
+  line-height: 1.5;
 }
 
 html {
@@ -151,6 +149,10 @@ input {
 
 .justify-ar{
   justify-content: space-around;
+}
+
+.justify-bt {
+  justify-content: space-between;
 }
 
 .gap-sm {

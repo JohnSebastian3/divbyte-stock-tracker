@@ -1,0 +1,32 @@
+.stock-container {
+  padding-top: 6rem;
+}
+
+.ticker-image {
+  max-width: 120px;
+  /* height: 150px; */
+}
+
+
+/* Main */
+
+.dividend-info {
+  border: 2px solid rgba(34,34,34,0.1);
+  padding: 2rem 1rem;
+  flex-basis: 60%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.dividend-info > * {
+  display: flex;
+  flex-direction: column;
+  
+  padding: 0 1.8rem;
+}
+
+/* Border styling for dividend info */
+.dividend-info > *:not(:nth-child(3n)) {
+  border-right: 1px solid rgba(34,34,34,0.2);
+}

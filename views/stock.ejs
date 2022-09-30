@@ -56,7 +56,7 @@
             <li>Beta: <%= metrics.beta %> </li>
           <% } %> 
           <% if(metrics.marketCap) { %>
-            <li>Market Cap: <%= (metrics.marketCap).toLocaleString('en-US') %></li>
+            <li>Market Cap: $<%= (metrics.marketCap).toLocaleString('en-US') %></li>
           <% } %> 
           <% if(metrics.peRatioTTM) { %>
             <li>TTM PE Ratio: <%= (metrics.peRatioTTM).toLocaleString('en-US', {

@@ -108,7 +108,7 @@ async function getStockData() {
       // changeCell.innerText = `$${Number(change).toLocaleString('en-US')} (${Number(changesPercentage).toLocaleString('en-US')}%)`;
       changeCell.appendChild(spanChange);
       changeCell.appendChild(spanPercentage);
-      changeCell.classList.add('flex', 'dir-col');
+      // changeCell.classList.add('flex', 'dir-col');
 
 
       const stockName = stockQuote[0].name;

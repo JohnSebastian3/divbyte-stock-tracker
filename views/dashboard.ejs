@@ -40,9 +40,9 @@
         <label for="ticker">Ticker</label>
         <input type="text" name="ticker" id="ticker-add" placeholder="ex. AAPL" required>
         <label for="shares">Number of Shares</label>
-        <input type="text" name="shares" id="shares-add" placeholder="Number of shares" required>
+        <input type="number" name="shares" id="shares-add" placeholder="Number of shares" required>
         <label for="basis">Average Cost</label>
-        <input type="text" name="basis" id="basis-add" placeholder="Cost Basis" required>
+        <input type="number" name="basis" id="basis-add" placeholder="Cost Basis" required>
         <button type="submit" id="addStock" class="btn btn-primary">Add</button>
       </form> 
     </div>
@@ -59,9 +59,9 @@
         <label for="ticker">Ticker</label>
         <input type="text" name="ticker" id="ticker-edit" required>
         <label for="shares">Number of Shares</label>
-        <input type="text" name="shares" id="shares-edit" required>
+        <input type="number" name="shares" id="shares-edit" required>
         <label for="basis">Average Cost</label>
-        <input type="text" name="basis" id="basis-edit" required>
+        <input type="number" name="basis" id="basis-edit" required>
         <button type="submit" id="addStock" class="btn btn-primary">Update</button>
       </form>
     </div>
@@ -121,11 +121,7 @@
           <td>
             
             <div class="control-buttons">
-              <!-- <form action="/dashboard/editStock/<%= stocks[i]._id %>?_method=PUT" method="POST">
-                <button type="submit" class="editButton"><i class="fa-solid fa-pen-to-square"></i></button>
-              </form> -->
-
-              
+             
               <a class="new-transaction"><i class="fa-solid fa-plus"></i></a>
               <a class="edit-stock" data-id="<%= stocks[i]._id %> "><i class="fa-solid fa-pen-to-square editButton"></i></a>
 

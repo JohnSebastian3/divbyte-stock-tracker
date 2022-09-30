@@ -19,44 +19,67 @@ module.exports = {
 
       let freq;
       let dividendYield;
+      let dividend;
       
-      if(Object.keys(dividendInfo.data).length > 0 && dividendInfo.data.historical[0].dividend != 0) {
-        let firstMonth = dividendInfo.data.historical[0].paymentDate.slice(5, 7);
-        if(Number(firstMonth) < 10) { 
-          firstMonth = Number(firstMonth.slice(1));
-        } else {
-          firstMonth = Number(firstMonth);
-        }
+      if(Object.keys(dividendInfo.data).length > 0 ) {
+        if(dividendInfo.data.historical[0].dividend != 0) {
+          
+          let firstMonth = dividendInfo.data.historical[0].paymentDate.slice(5, 7);
+          dividend = dividendInfo.data.historical[0].dividend.toLocaleString('en-US', {
+            maximumFractionDigits: 2,
+            minimumFractionDigits: 2
+          });
   
-        let secondMonth = dividendInfo.data.historical[1].paymentDate.slice(5, 7);
+  
+          if(Number(firstMonth) < 10) { 
+            firstMonth = Number(firstMonth.slice(1));
+          } else {
+            firstMonth = Number(firstMonth);
+          }
+    
+          let secondMonth = dividendInfo.data.historical[1].paymentDate.slice(5, 7);
+          
+          if(Number(secondMonth) < 10) {
+            secondMonth = Number(secondMonth.slice(1));
+          } else {
+            secondMonth = Number(secondMonth);
+          }
+    
+          let diff = Math.abs(firstMonth - secondMonth);
+          if(diff % 12 === 0) {
+            freq = 'Annual';
+            dividendYield = ((dividendInfo.data.historical[0].dividend  / profile.data[0].price) * 100).toFixed(2);
+          } else if(diff % 6 === 0) {
+            freq = 'Semi-Annual';
+            dividendYield = ((dividendInfo.data.historical[0].dividend * 2 / profile.data[0].price) * 100).toFixed(2);
+          } else if (diff % 3 === 0) {
+            freq = 'Quarterly';
+            dividendYield = ((dividendInfo.data.historical[0].dividend * 4 / profile.data[0].price) * 100).toFixed(2);
+          } else if(diff % 1 === 0) {
+            freq = 'Monthly';
+            dividendYield = ((dividendInfo.data.historical[0].dividend * 12 / profile.data[0].price) * 100).toFixed(2);
+  
+          }
+        }
         
-        if(Number(secondMonth) < 10) {
-          secondMonth = Number(secondMonth.slice(1));
-        } else {
-          secondMonth = Number(secondMonth);
+        if(dividendInfo.data.historical[0].dividend == 0) {
+          dividend = dividendInfo.data.historical[0].dividend.toLocaleString('en-US', {
+            maximumFractionDigits: 2,
+            minimumFractionDigits: 2
+          });
         }
-  
-        let diff = Math.abs(firstMonth - secondMonth);
-        if(diff % 12 === 0) {
-          freq = 'Annual';
-          dividendYield = ((dividendInfo.data.historical[0].dividend  / profile.data[0].price) * 100).toFixed(2);
-        } else if(diff % 6 === 0) {
-          freq = 'Semi-Annual';
-          dividendYield = ((dividendInfo.data.historical[0].dividend * 2 / profile.data[0].price) * 100).toFixed(2);
-        } else if (diff % 3 === 0) {
-          freq = 'Quarterly';
-          dividendYield = ((dividendInfo.data.historical[0].dividend * 4 / profile.data[0].price) * 100).toFixed(2);
-        } else if(diff % 1 === 0) {
-          freq = 'Monthly';
-          dividendYield = ((dividendInfo.data.historical[0].dividend * 12 / profile.data[0].price) * 100).toFixed(2);
 
-        }
+      } 
+
+     
+
+      // FIX undefined
+      if(dividendYield) {
+        dividendYield = dividendYield.toLocaleString('en-US', {
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 2
+        })
       }
-
-      dividendYield = dividendYield.toLocaleString('en-US', {
-        maximumFractionDigits: 2,
-        minimumFractionDigits: 2
-      })
 
       const keyMetrics = {
         sector: profile.data[0].sector,
@@ -70,13 +93,13 @@ module.exports = {
         divPerShareTTM: metrics.data[0].dividendPerShareTTM,
       }
 
-
-      // console.log("PROFILE:",profile.data);
+      
       res.render('stock.ejs', {profile: profile.data[0], 
-        payoutFreq: freq, 
+        payoutFreq: freq ? freq : '-', 
         ticker: req.params.ticker, 
-        divYield: dividendYield,
-        divPayout: dividendInfo.data.historical[0].dividend,
+        divYield: dividendYield > 0 ? dividendYield : '0.00',
+        // FIX undefined
+        divPayout: Object.keys(dividendInfo.data).length != 0 ? dividend : '0.00',
         metrics: keyMetrics,
       });
 

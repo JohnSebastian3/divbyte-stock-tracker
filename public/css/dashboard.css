@@ -120,7 +120,12 @@
 }
 
 .row {
-  height: 75px;
+  height: 105px;
+  overflow: hidden;
+}
+
+.row > td {
+  height: 100%;
 }
 
 

@@ -1,19 +1,121 @@
 const Stock = require('../models/Stock');
 const mongoose = require('mongoose');
+const axios = require('axios');
 
 module.exports = {
   getDashboard: async (req, res) => {
     try {
       // TODO: AXIOS to get all stocks to dashboard
         const stockItems = await Stock.find({userId: req.user.id});
-        let stockList;
+
+        let stockList = [];
+        let annualDividend = 0;
+        let dividendYield = 0;
+        let totalProfitLoss = 0;
+        let portfolioValue = 0;
+        let dividendFrequency;
+
         for(let i = 0; i < stockItems.length; i++) {
+          const currentStock = {};
+          let {ticker, shares, basis} = stockItems[i];
+
+          currentStock.ticker = ticker;
+          currentStock.shares = shares;
+          currentStock.basis = basis;
+
+          const divResponse = await axios.get(
+            `https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`
+          );
+
+          const quoteResponse = await axios.get(
+            `https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`
+          )
+
+          const metrics = await axios.get(
+            `https://financialmodelingprep.com/api/v3/key-metrics-ttm/${ticker}?limit=40&apikey=ac08be8670bfbfba904e1e17d7596342`
+          )
+
+          // console.log('DIV RES:', divResponse.data.historical[0]);
+          // console.log('QUOTE RES:', quoteResponse.data);
+
+          const currentPrice = quoteResponse.data[0].price;
+          const change = quoteResponse.data[0].change;
+          const changesPercentage = quoteResponse.data[0].changesPercentage;
+
+          currentStock.change = change;
+          currentStock.changesPercentage = changesPercentage;
+          currentStock.currentPrice = currentPrice;
+
+          const profitTotal = ((shares * currentPrice) - (shares * basis));
+          totalProfitLoss += Number(profitTotal);
+
+          portfolioValue += shares * currentPrice;
+
+          currentStock.profitTotal = profitTotal;
+
+          if(divResponse.data.historical) {
+            const currentDivInfo = divResponse.data.historical[0];
+            const pastDivInfo = divResponse.data.historical[1];
+            let firstMonth = currentDivInfo.paymentDate.slice(5, 7);
+            let secondMonth = pastDivInfo.paymentDate.slice(5, 7);
+            
+            if(Number(firstMonth) < 10) { 
+              // Gets rid of zero at the front
+              firstMonth = Number(firstMonth.slice(1));
+            } else {
+              firstMonth = Number(firstMonth);
+            }
+      
+            if(Number(secondMonth) < 10) {
+              secondMonth = Number(secondMonth.slice(1));
+            } else {
+              secondMonth = Number(secondMonth);
+            }
+      
+            let diff = Math.abs(firstMonth - secondMonth);
+            let payoutsPerYear = 0;
+            if(diff % 12 === 0) {
+              dividendFrequency = 'NA';
+              payoutsPerYear = 0;
+            } else if(diff % 6 === 0) {
+              dividendFrequency = 'Semi-Annual';
+              payoutsPerYear = 2;
+            } else if (diff % 3 === 0) {
+              dividendFrequency = 'Quarterly';
+              payoutsPerYear = 4;
+            } else if(diff % 1 === 0) {
+              dividendFrequency = 'Monthly';
+              payoutsPerYear = 12;
+            }
+            
+            let dividend = currentDivInfo.dividend;
+            dividendYield = ((dividend * payoutsPerYear / currentPrice) * 100).toFixed(2);
+            annualDividend += shares * dividend * 4; // quarterly for now, will add algo to change this soon
+            if(metrics.data[0].dividendPerShareTTM == 0 || metrics.data[0].dividendPerShareTTM === null) {
+              dividendYield = '-';
+              dividendFrequency = '-';
+            }
+            
+            currentStock.dividendYield = dividendYield;
+            currentStock.dividendFrequency = dividendFrequency;
+            // console.log(`DIVIDEND YIELD (${ticker}): ${dividendYield}`);
+            // console.log(`DIV FREQ (${ticker}): ${dividendFrequency}`);
+            // console.log(annualDividend);
+            // console.log('Current stock:,', currentStock);
+          }
+
+          stockList.push(currentStock);
+
+          } 
           
-        }
-
-
-
-        res.render('dashboard.ejs', {stocks: stockItems, user: req.user});
+        
+        res.render('dashboard.ejs', {
+          stocks: stockList, 
+          totalProfitLoss: totalProfitLoss,
+          annualDividend: annualDividend,
+          portfolioValue: portfolioValue,
+          user: req.user,
+        });
     } catch(err) {
       console.log(err);
     }
@@ -35,7 +137,6 @@ module.exports = {
   deleteStock: async(req, res) => {
     try {
       const id = req.params.id;
-      // const id = req.body.stockIdFromJSFile;
       await Stock.findOneAndDelete({_id: id});
       res.redirect('/dashboard');
       console.log('Deleted Stock!');

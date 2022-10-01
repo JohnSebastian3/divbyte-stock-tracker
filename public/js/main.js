@@ -151,9 +151,6 @@ async function getStockData() {
       dividendCell.innerText = `-`
      }
  
-
-
-  
     } catch(err) {
       console.log(err);
     }
@@ -212,5 +209,5 @@ function calculateRealTime() {
 
 // getCurrentPrice();
 // getDividend();
-getStockData();
+// getStockData();
 

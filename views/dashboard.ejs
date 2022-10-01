@@ -15,14 +15,14 @@
 
   <div class="dash-header">
 
-    <h1>$<span class="currentValue">0</span> <span class="netProfit"></span></h2>
+    <h1>$<span class="currentValue"><%= portfolioValue %> </span> <span class="netProfit"><%= totalProfitLoss %> </span></h2>
     <button id="addButton" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
 
   </div>
   <div id="statistics">
 
     <h3>Portfolio Yield: <span class="annual-yield"></span>%</h3>
-    <h3>Annual Income: $<span class="yearlyDividend">0</span></h3>
+    <h3>Annual Income: $<span class="yearlyDividend"><%= annualDividend %> </span></h3>
     <h3>Real time: $<span class="realTime"></span></h3>
 
   </div>
@@ -114,10 +114,19 @@
           <td>
             $<%= stocks[i].basis.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
           </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>
+            <span><%= stocks[i].change %></span>
+            <span><%= stocks[i].changesPercentage %> </span> 
+          </td>
+          <td>
+            <%= stocks[i].currentPrice %> 
+          </td>
+          <td>
+            <%= stocks[i].profitTotal %> 
+          </td>
+          <td>
+            <%= stocks[i].dividendYield %> 
+          </td>
           <td>
             
             <div class="control-buttons">

@@ -13,7 +13,7 @@ module.exports = {
 
       const metrics = await axios.get(
         `https://financialmodelingprep.com/api/v3/key-metrics-ttm/${req.params.ticker}?limit=40&apikey=ac08be8670bfbfba904e1e17d7596342`
-        )
+      )
 
       
 

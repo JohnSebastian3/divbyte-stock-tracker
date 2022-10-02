@@ -1,6 +1,7 @@
 const Stock = require('../models/Stock');
 const mongoose = require('mongoose');
 const axios = require('axios');
+const formatNumber = require('../public/js/format');
 
 module.exports = {
   getDashboard: async (req, res) => {
@@ -20,8 +21,8 @@ module.exports = {
           let {ticker, shares, basis} = stockItems[i];
 
           currentStock.ticker = ticker;
-          currentStock.shares = shares;
-          currentStock.basis = basis;
+          currentStock.shares = formatNumber(shares);
+          currentStock.basis = formatNumber(basis);
 
           const divResponse = await axios.get(
             `https://financialmodelingprep.com/api/v3/historical-price-full/stock_dividend/${ticker}?apikey=ac08be8670bfbfba904e1e17d7596342`
@@ -35,23 +36,21 @@ module.exports = {
             `https://financialmodelingprep.com/api/v3/key-metrics-ttm/${ticker}?limit=40&apikey=ac08be8670bfbfba904e1e17d7596342`
           )
 
-          // console.log('DIV RES:', divResponse.data.historical[0]);
-          // console.log('QUOTE RES:', quoteResponse.data);
 
           const currentPrice = quoteResponse.data[0].price;
           const change = quoteResponse.data[0].change;
           const changesPercentage = quoteResponse.data[0].changesPercentage;
 
-          currentStock.change = change;
-          currentStock.changesPercentage = changesPercentage;
-          currentStock.currentPrice = currentPrice;
+          currentStock.change = formatNumber(change);
+          currentStock.changesPercentage = formatNumber(changesPercentage);
+          currentStock.currentPrice = formatNumber(currentPrice);
 
           const profitTotal = ((shares * currentPrice) - (shares * basis));
           totalProfitLoss += Number(profitTotal);
 
           portfolioValue += shares * currentPrice;
 
-          currentStock.profitTotal = profitTotal;
+          currentStock.profitTotal = formatNumber(profitTotal);
 
           if(divResponse.data.historical) {
             const currentDivInfo = divResponse.data.historical[0];
@@ -90,7 +89,7 @@ module.exports = {
             
             let dividend = currentDivInfo.dividend;
             dividendYield = ((dividend * payoutsPerYear / currentPrice) * 100).toFixed(2);
-            annualDividend += shares * dividend * 4; // quarterly for now, will add algo to change this soon
+            annualDividend += shares * dividend * payoutsPerYear; // quarterly for now, will add algo to change this soon
             if(metrics.data[0].dividendPerShareTTM == 0 || metrics.data[0].dividendPerShareTTM === null) {
               dividendYield = '-';
               dividendFrequency = '-';
@@ -98,10 +97,7 @@ module.exports = {
             
             currentStock.dividendYield = dividendYield;
             currentStock.dividendFrequency = dividendFrequency;
-            // console.log(`DIVIDEND YIELD (${ticker}): ${dividendYield}`);
-            // console.log(`DIV FREQ (${ticker}): ${dividendFrequency}`);
-            // console.log(annualDividend);
-            // console.log('Current stock:,', currentStock);
+
           }
 
           stockList.push(currentStock);
@@ -111,9 +107,15 @@ module.exports = {
         
         res.render('dashboard.ejs', {
           stocks: stockList, 
-          totalProfitLoss: totalProfitLoss,
-          annualDividend: annualDividend,
-          portfolioValue: portfolioValue,
+          totalProfitLoss: totalProfitLoss.toLocaleString('en-US', 
+          {minimumFractionDigits: 2, maximumFractionDigits: 2}
+          ),
+          annualDividend: annualDividend.toLocaleString('en-US', 
+          {minimumFractionDigits: 2, maximumFractionDigits: 2}
+          ),
+          portfolioValue: portfolioValue.toLocaleString('en-US', 
+          {minimumFractionDigits: 2, maximumFractionDigits: 2}
+          ),
           user: req.user,
         });
     } catch(err) {

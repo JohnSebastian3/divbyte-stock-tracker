@@ -15,7 +15,6 @@ module.exports = {
         `https://financialmodelingprep.com/api/v3/key-metrics-ttm/${req.params.ticker}?limit=40&apikey=ac08be8670bfbfba904e1e17d7596342`
       )
 
-      
 
       let freq;
       let dividendYield;
@@ -94,7 +93,8 @@ module.exports = {
       }
 
       
-      res.render('stock.ejs', {profile: profile.data[0], 
+      res.render('stock.ejs', {
+        profile: profile.data[0], 
         payoutFreq: freq ? freq : '-', 
         ticker: req.params.ticker, 
         divYield: dividendYield > 0 ? dividendYield : '0.00',

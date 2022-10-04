@@ -15,7 +15,10 @@
 
   <div class="dash-header">
 
-    <h1>$<span class="currentValue"><%= portfolioValue %> </span> <span class="netProfit"><%= totalProfitLoss %> </span></h2>
+    <h2>
+      $<span class="currentValue"><%= portfolioValue %> </span> 
+      <span class="netProfit <%= totalProfitLoss > 0 ? "txt-green" : "txt-red" %> "><%= totalProfitLoss %> </span>
+    </h2>
     <button id="addButton" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
 
   </div>
@@ -23,7 +26,7 @@
 
     <h3>Portfolio Yield: <span class="annual-yield"></span>%</h3>
     <h3>Annual Income: $<span class="yearlyDividend"><%= annualDividend %> </span></h3>
-    <h3>Real time: $<span class="realTime"></span></h3>
+    <!-- <h3>Real time: $<span class="realTime"></span></h3> -->
 
   </div>
   
@@ -40,9 +43,9 @@
         <label for="ticker">Ticker</label>
         <input type="text" name="ticker" id="ticker-add" placeholder="ex. AAPL" required>
         <label for="shares">Number of Shares</label>
-        <input type="number" name="shares" id="shares-add" placeholder="Number of shares" required>
+        <input type="text" name="shares" id="shares-add" placeholder="Number of shares" required>
         <label for="basis">Average Cost</label>
-        <input type="number" name="basis" id="basis-add" placeholder="Cost Basis" required>
+        <input type="text" name="basis" id="basis-add" placeholder="Cost Basis" required>
         <button type="submit" id="addStock" class="btn btn-primary">Add</button>
       </form> 
     </div>
@@ -59,9 +62,9 @@
         <label for="ticker">Ticker</label>
         <input type="text" name="ticker" id="ticker-edit" required>
         <label for="shares">Number of Shares</label>
-        <input type="number" name="shares" id="shares-edit" required>
+        <input type="text" name="shares" id="shares-edit" required>
         <label for="basis">Average Cost</label>
-        <input type="number" name="basis" id="basis-edit" required>
+        <input type="text" name="basis" id="basis-edit" required>
         <button type="submit" id="addStock" class="btn btn-primary">Update</button>
       </form>
     </div>
@@ -115,14 +118,16 @@
             $<%= stocks[i].basis.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
           </td>
           <td>
-            <span><%= stocks[i].change %></span>
-            <span><%= stocks[i].changesPercentage %> </span> 
+            <span ><%= stocks[i].change %></span>
+            <span class=<%= stocks[i].changesPercentage > 0 ? "txt-green" : "txt-red" %>>
+              (<%= stocks[i].changesPercentage %>%)
+            </span> 
           </td>
           <td>
-            <%= stocks[i].currentPrice %> 
+            $<%= stocks[i].currentPrice %> 
           </td>
-          <td>
-            <%= stocks[i].profitTotal %> 
+          <td class=<%= stocks[i].profitTotal > 0 ? "txt-green" : "txt-red" %>>
+            $<%= stocks[i].profitTotal %> 
           </td>
           <td>
             <%= stocks[i].dividendYield %> 

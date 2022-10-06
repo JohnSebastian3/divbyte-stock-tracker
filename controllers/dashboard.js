@@ -10,18 +10,21 @@ module.exports = {
         const stockItems = await Stock.find({userId: req.user.id});
 
         let stockList = [];
+        let companyName;
         let annualDividend = 0;
         let dividendYield = 0;
         let totalProfitLoss = 0;
         let portfolioValue = 0;
         let dividendFrequency;
+        let portfolioYield;
 
         for(let i = 0; i < stockItems.length; i++) {
           const currentStock = {};
           let {ticker, shares, basis} = stockItems[i];
 
+          currentStock.id = stockItems[i].id;
           currentStock.ticker = ticker;
-          currentStock.shares = formatNumber(shares);
+          currentStock.shares = shares;
           currentStock.basis = formatNumber(basis);
 
           const divResponse = await axios.get(
@@ -40,10 +43,12 @@ module.exports = {
           const currentPrice = quoteResponse.data[0].price;
           const change = quoteResponse.data[0].change;
           const changesPercentage = quoteResponse.data[0].changesPercentage;
-
+          const companyName = quoteResponse.data[0].name;
+    
           currentStock.change = formatNumber(change);
           currentStock.changesPercentage = formatNumber(changesPercentage);
           currentStock.currentPrice = formatNumber(currentPrice);
+          currentStock.name = companyName;
 
           const profitTotal = ((shares * currentPrice) - (shares * basis));
           totalProfitLoss += Number(profitTotal);
@@ -101,9 +106,11 @@ module.exports = {
           }
 
           stockList.push(currentStock);
+          portfolioYield = ((annualDividend / portfolioValue) * 100).toFixed(2);
+         
 
           } 
-          
+
         
         res.render('dashboard.ejs', {
           stocks: stockList, 
@@ -116,6 +123,7 @@ module.exports = {
           portfolioValue: portfolioValue.toLocaleString('en-US', 
           {minimumFractionDigits: 2, maximumFractionDigits: 2}
           ),
+          portfolioYield: portfolioYield,
           user: req.user,
         });
     } catch(err) {
@@ -148,7 +156,6 @@ module.exports = {
   },
   editStock: async(req, res) => {
     const id = req.params.id.trim();
-
     try {
       await Stock.findOneAndUpdate(
         {_id: mongoose.Types.ObjectId(id)},

@@ -15,16 +15,16 @@
 
   <div class="dash-header">
 
-    <h2>
+    <h1>
       $<span class="currentValue"><%= portfolioValue %> </span> 
-      <span class="netProfit <%= totalProfitLoss > 0 ? "txt-green" : "txt-red" %> "><%= totalProfitLoss %> </span>
-    </h2>
+      <span class="netProfit <%= +totalProfitLoss.replaceAll(',', '') > 0 ? "txt-green" : "txt-red" %>">$<%= totalProfitLoss %> </span>
+    </h1>
     <button id="addButton" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
 
   </div>
   <div id="statistics">
 
-    <h3>Portfolio Yield: <span class="annual-yield"></span>%</h3>
+    <h3>Portfolio Yield: <span class="annual-yield"><%= portfolioYield %></span>%</h3>
     <h3>Annual Income: $<span class="yearlyDividend"><%= annualDividend %> </span></h3>
     <!-- <h3>Real time: $<span class="realTime"></span></h3> -->
 
@@ -107,11 +107,12 @@
             <div id="symbol">
               <a href="/stock/<%= stocks[i].ticker %>" ><%= stocks[i].ticker %></a> 
             </div>
-            <div id="corporation">
-
+            <div id="corporation" class="sm-txt">
+              <%= stocks[i].name %> 
             </div>
           </td>
           <td>
+            <span class="hidden"><%= stocks[i].shares %> </span>
             <%= stocks[i].shares.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
           </td>
           <td>
@@ -119,27 +120,27 @@
           </td>
           <td>
             <span ><%= stocks[i].change %></span>
-            <span class=<%= stocks[i].changesPercentage > 0 ? "txt-green" : "txt-red" %>>
+            <span class=<%= stocks[i].changesPercentage > 0 ? "txt-green" : "txt-red"%>>
               (<%= stocks[i].changesPercentage %>%)
             </span> 
           </td>
           <td>
             $<%= stocks[i].currentPrice %> 
           </td>
-          <td class=<%= stocks[i].profitTotal > 0 ? "txt-green" : "txt-red" %>>
+          <td class=<%= +stocks[i].profitTotal.replaceAll(',', '') > 0 ? "txt-green" : "txt-red"%>>
             $<%= stocks[i].profitTotal %> 
           </td>
           <td>
-            <%= stocks[i].dividendYield %> 
+            <%= stocks[i].dividendYield ? stocks[i].dividendYield + '%' : '-' %> 
           </td>
           <td>
             
             <div class="control-buttons">
              
               <a class="new-transaction"><i class="fa-solid fa-plus"></i></a>
-              <a class="edit-stock" data-id="<%= stocks[i]._id %> "><i class="fa-solid fa-pen-to-square editButton"></i></a>
+              <a class="edit-stock" data-id="<%= stocks[i].id %> "><i class="fa-solid fa-pen-to-square editButton"></i></a>
 
-              <form action="/dashboard/deleteStock/<%= stocks[i]._id %>?_method=DELETE" method="POST">
+              <form action="/dashboard/deleteStock/<%= stocks[i].id %>?_method=DELETE" method="POST">
                 <button type="submit" class="deleteButton"><i class="fa-solid fa-trash"></i></button>
               </form>
 

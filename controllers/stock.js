@@ -18,7 +18,7 @@ module.exports = {
 
       let freq;
       let dividendYield;
-      let dividend;
+      let dividend;3
       
       if(Object.keys(dividendInfo.data).length > 0 ) {
         if(dividendInfo.data.historical[0].dividend != 0) {
@@ -91,7 +91,6 @@ module.exports = {
         payoutRatioTTM: metrics.data[0].payoutRatioTTM,
         divPerShareTTM: metrics.data[0].dividendPerShareTTM,
       }
-
       
       res.render('stock.ejs', {
         profile: profile.data[0], 

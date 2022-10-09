@@ -119,7 +119,7 @@
             $<%= stocks[i].basis.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
           </td>
           <td>
-            <span ><%= stocks[i].change %></span>
+            <span >$<%= stocks[i].change %></span>
             <span class=<%= stocks[i].changesPercentage > 0 ? "txt-green" : "txt-red"%>>
               (<%= stocks[i].changesPercentage %>%)
             </span> 
@@ -131,7 +131,7 @@
             $<%= stocks[i].profitTotal %> 
           </td>
           <td>
-            <%= stocks[i].dividendYield ? stocks[i].dividendYield + '%' : '-' %> 
+            <%= stocks[i].dividendYield > 0 ? stocks[i].dividendYield + '%' : '-' %> 
           </td>
           <td>
             

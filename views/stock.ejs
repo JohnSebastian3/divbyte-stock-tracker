@@ -29,7 +29,7 @@
   
         <div class="dividend-info">
   
-          <h4>Dividend Yield: <span><%= divYield %>% </span></h4>
+          <h4>Dividend Yield: <span><%= metrics.dividendYieldTTM ? divYield  : '0.00' %>% </span></h4>
           <h4>Last Dividend Payout (per share): <span>$<%= divPayout %></span></h4>
           <div>
             <h4>Dividend Frequency</h4>

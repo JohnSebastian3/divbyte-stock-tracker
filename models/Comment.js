@@ -8,6 +8,10 @@ const CommentSchema = new mongoose.Schema({
   likes: {
     type: Number
   },
+  likers: {
+    type: Array,
+    default: [],
+  },
   ticker: {
     type: String,
     required: true,

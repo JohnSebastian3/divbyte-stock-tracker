@@ -13,9 +13,17 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  stocks: {
+    type: Number,
+    default: 0
+  },
+  userScore: {
+    type: Number,
+    default: 0
+  },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now 
   },
 })
 

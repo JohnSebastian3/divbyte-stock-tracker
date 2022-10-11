@@ -2,6 +2,7 @@ const Stock = require('../models/Stock');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const formatNumber = require('../public/js/format');
+const User = require('../models/User');
 
 module.exports = {
   getDashboard: async (req, res) => {
@@ -138,6 +139,13 @@ module.exports = {
         basis: req.body.basis, 
         userId: req.user.id
       });
+
+      await User.findOneAndUpdate(
+        {_id: req.user.id,},
+        {
+          $inc: {stocks: 1}
+        }
+        )
       console.log('Stock has been added!');
       res.redirect('/dashboard');
     } catch(err) {
@@ -148,6 +156,12 @@ module.exports = {
     try {
       const id = req.params.id;
       await Stock.findOneAndDelete({_id: id});
+      await User.findOneAndUpdate(
+        {_id: req.user.id,},
+        {
+          $inc: {stocks: -1}
+        }
+        )
       res.redirect('/dashboard');
       console.log('Deleted Stock!');
     } catch(err) {

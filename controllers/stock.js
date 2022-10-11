@@ -1,4 +1,5 @@
 const axios = require("axios");
+const mongoose = require('mongoose');
 const Comment = require('../models/Comment');
 const User = require('../models/User');
 
@@ -113,6 +114,7 @@ module.exports = {
         metrics: keyMetrics,
         comments: comments,
         commentUsers: users,
+        currentUser: req.user
       });
 
     }
@@ -128,6 +130,41 @@ module.exports = {
         ticker: req.params.ticker,
         user: req.user.id,
       });
+      res.redirect(`/stock/${req.params.ticker}`);
+    } catch(err) {
+      console.log(err);
+    }
+  },
+  likeComment: async (req, res) => {
+    try {
+      let alreadyLiked = false;
+      const comment = await Comment.findById(req.params.commentID);
+      const currentLikers = comment.likers;
+
+      for(let i = 0; i < currentLikers.length; i++) {
+        if(currentLikers[i] == req.user.id) {
+          alreadyLiked = true;
+        }
+      }
+      if(!alreadyLiked) {
+        const liker = await User.findById(req.user.id);
+        await Comment.findOneAndUpdate(
+          {_id: req.params.commentID},
+          {
+            $push: {likers: liker.id},
+            $inc: {likes: 1}
+          }
+          );
+        } 
+        res.redirect(`/stock/${req.params.ticker}`);
+    } catch(err) {
+      console.log(err);
+    }
+  }, 
+  deleteComment: async (req, res) => {
+    try {
+      await Comment.findByIdAndDelete({_id: req.params.commentID});
+      console.log('comment deleted');
       res.redirect(`/stock/${req.params.ticker}`);
     } catch(err) {
       console.log(err);

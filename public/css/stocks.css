@@ -45,6 +45,7 @@
   font-size: 2.4rem;
 }
 
+/* Metrics */
 .key-metrics {
   background-color: white;
   border-radius: 20px;
@@ -74,12 +75,30 @@
   border-bottom: 1px solid rgba(34,34,34, 0.25);
 }
 
+/* Comments */
+
 .comments {
   /* background-color: white; */
   border: 1px solid rgba(34,34,34, 0.25);
   border-radius: 20px;
   padding: 1rem 2rem;
 }
+
+.like-button,
+.delete-comment {
+  font-size: 2.2rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: color 200ms;
+} 
+
+.like-button:hover,
+.delete-comment:hover {
+  color:rgba(34,34,34, 0.70);
+}
+
+
 
 
 

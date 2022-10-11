@@ -1,3 +1,5 @@
+const User = require('../models/User');
+
 module.exports = {
   getHome: (req, res) => {
      // res.render('login.ejs', req);
@@ -6,4 +8,15 @@ module.exports = {
     }
     res.render('welcome');
   },
+  getProfile: async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      res.render('profile.ejs', {
+        user: user,
+      })
+    } catch(err) {
+      console.log(err);
+    }
+    
+  }
 }

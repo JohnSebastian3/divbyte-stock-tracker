@@ -1,4 +1,6 @@
 const axios = require("axios");
+const Comment = require('../models/Comment');
+const User = require('../models/User');
 
 module.exports = {
   getStock: async (req, res) => {
@@ -18,11 +20,12 @@ module.exports = {
 
       let freq;
       let dividendYield;
-      let dividend;3
+      let dividend;
+      let divDate;
       
       if(Object.keys(dividendInfo.data).length > 0 ) {
         if(dividendInfo.data.historical[0].dividend != 0) {
-          
+          divDate = dividendInfo.data.historical[0].label;
           let firstMonth = dividendInfo.data.historical[0].paymentDate.slice(5, 7);
           dividend = dividendInfo.data.historical[0].dividend.toLocaleString('en-US', {
             maximumFractionDigits: 2,
@@ -70,7 +73,7 @@ module.exports = {
 
       } 
 
-     
+      
 
       // FIX undefined
       if(dividendYield) {
@@ -91,20 +94,43 @@ module.exports = {
         payoutRatioTTM: metrics.data[0].payoutRatioTTM,
         divPerShareTTM: metrics.data[0].dividendPerShareTTM,
       }
+
+      const comments = await Comment.find({ticker: req.params.ticker});
+      const users = [];
+      for(let i = 0; i < comments.length; i++) {
+        const currUser = await User.findById(comments[i].user);
+        users.push(currUser);
+      } 
       
       res.render('stock.ejs', {
         profile: profile.data[0], 
-        payoutFreq: freq ? freq : '-', 
+        payoutFreq: freq, 
         ticker: req.params.ticker, 
-        divYield: dividendYield > 0 ? dividendYield : '0.00',
+        divYield: dividendYield,
         // FIX undefined
         divPayout: Object.keys(dividendInfo.data).length != 0 ? dividend : '0.00',
+        divDate: divDate,
         metrics: keyMetrics,
+        comments: comments,
+        commentUsers: users,
       });
 
     }
     catch(err) {
       console.log(err);
     }
-  } 
+  },
+  addComment: async (req, res) => {
+    try {
+      await Comment.create({
+        content: req.body.comment,
+        likes: 0,
+        ticker: req.params.ticker,
+        user: req.user.id,
+      });
+      res.redirect(`/stock/${req.params.ticker}`);
+    } catch(err) {
+      console.log(err);
+    }
+  }
 }

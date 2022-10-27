@@ -4,72 +4,75 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"     >
-  <link rel="stylesheet" href="/css/welcome.css">
-  <title>DivByte </title>
+  <!-- <link rel="stylesheet" href="/css/welcome.css"> -->
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <title>DivByte - Portfolio Manager </title>
 </head>
-<body>
-  <div class="container auto-margin flex dir-col gap-lg justify-ct vh-stretch">
-    <div>
-      <h1 id="heading-main" class="weight-b text-ct h1-large">The Simple and Elegant Portfolio Tracker App</h1>
-      <p class="text-ct p-large">Stay Up to Date with the Performance and Dividend Income of Your Portfolio</p>
+<body class="flex flex-col justify-center body">
+  <%- include ('./partials/header') %>
+  <div class="mx-auto flex flex-col justify-center h-screen gap-20 container">
+    <div class="text-center flex flex-col gap-12">
+      <h1 id="heading-main" class="text-7xl font-semibold text-indigo-500">The Simple & Elegant Portfolio Tracker App</h1>
+      <p class="text-4xl">Stay Up to Date with the Performance and Dividend Income of Your Portfolio</p>
     </div>
 
-    <div class="box-md auto-margin flex justify-ar align-ct dir-col white border-bl">
-      <h2>Create An Account</h2>
+    <div class="card">
+      <h2 class="text-3xl text-center font-semibold text-indigo-500">Create Your Account</h2>
       <%- include ('./partials/messages') %>
-      <form action="/register" method="POST" id="register" class="">
-        <div class="form-group">
-          <label for="name">Name</label>
+      <form action="/register" method="POST" id="register" class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <label for="name" class="text-xl">Name</label>
           <input
             type="name"
             id="name"
             name="name"
-            class="form-control"
+            class="input"
             placeholder="Enter Name"
             value="<%= typeof name != 'undefined' ? name : '' %>"
           />
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
+        <div class="flex flex-col gap-1">
+          <label for="email" class="text-xl">Email</label>
           <input
             type="email"
             id="email"
             name="email"
-            class="form-control"
+            class="input"
             placeholder="Enter Email"
             value="<%= typeof email != 'undefined' ? email : '' %>"
           />
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
+        <div class="flex flex-col gap-1">
+          <label for="password" class="text-xl">Password</label>
           <input
             type="password"
             id="password"
             name="password"
-            class="form-control"
+            class="input"
             placeholder="Create Password"
             value="<%= typeof password != 'undefined' ? password : '' %>"
           />
         </div>
-        <div class="form-group">
-          <label for="password2">Confirm Password</label>
+        <div class="flex flex-col gap-1">
+          <label for="password2" class="text-xl">Confirm Password</label>
           <input
             type="password"
             id="password2"
             name="password2"
-            class="form-control"
+            class="input"
             placeholder="Confirm Password"
             value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
           />
         </div>
-        <div class="flex justify-ct">
-          <button type="submit" class="btn btn-primary w-stretch">
+        <div class="flex justify-center">
+          <button type="submit" class="btn-primary mt-2 basis-full mb-1">
             Register
           </button>
         </div>
       </form>
 
-      <p>Have an account? <a href="/login">Login Here</a></p>
+      <p class="text-2xl text-center">Have an account? <a href="/login" class="link">Login Here</a></p>
     </div>
     </div>
 </body>

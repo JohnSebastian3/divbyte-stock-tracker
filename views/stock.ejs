@@ -4,13 +4,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/stocks.css"> 
+  <!-- <link rel="stylesheet" href="/css/stocks.css">  -->
+  <link rel="stylesheet" href="/css/styles.css">
   <title>Stock</title>
 </head>
-  <body>
-    <div class="stock-container flex dir-col gap-m">
+  <body class="body">
+    <% if(user) { %>
+      <%-include ('./partials/header-logged', locals) %>
+      <% } else { %>
+        <%- include ('./partials/header') %>
+        <% } %>  
 
-      <div class="info flex align-ct gap-m">
+    <div class="flex flex-col gap-5 container mt-12">
+
+      <div class="info flex items-center gap-5 border border-gray-300 rounded-lg px-2 py-1 bg-white">
         
         <div class="main-image">
           <% if(profile.image)  { %> 
@@ -125,7 +132,7 @@
           <%= profile.description %> 
         <% } %> 
       </div>
-      <% if(currentUser) { %>
+      <% if(user) { %>
         <div><a href="/dashboard">Back to Dashboard</a></div>
         <% } %> 
       <div class="comments">
@@ -139,7 +146,7 @@
               <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
                 <button type="submit" class="like-button"><i class="fa-regular fa-thumbs-up"></i></button>
               </form>
-              <% if(currentUser && currentUser.id == commentUsers[i].id) {%>
+              <% if(user && user.id == commentUsers[i].id) {%>
                 <form action="/stock/<%= ticker %>/deleteComment/<%= comments[i].id%>?_method=DELETE" method="POST">
                   <button type="submit" class="delete-comment"><i class="fa-solid fa-trash"></i></button>
                 </form>

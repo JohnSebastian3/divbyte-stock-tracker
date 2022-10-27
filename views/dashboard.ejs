@@ -5,97 +5,104 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <title>Document</title>
 </head>
-<body>
+<body class="body">
+  <%- include ('./partials/header-logged', locals) %>
 
-  <div class="dash-container">
+  <div class="container flex flex-col mt-14 h-screen gap-10">
 
-    <h2><%= user.name %>'s Portfolio</h2>
-    <a href="/profile/<%= user.id %> ">My Profile</a>
+    <!-- <h2 class="text-6xl"><%= user.name %>'s Portfolio</h2> -->
+    <!-- <a href="/profile/<%= user.id %>" class="text-3xl">My Profile</a> -->
 
-  <div class="dash-header">
-
-    <h1>
-      $<span class="currentValue"><%= portfolioValue %> </span> 
-      <span class="netProfit <%= +totalProfitLoss.replaceAll(',', '') > 0 ? "txt-green" : "txt-red" %>">$<%= totalProfitLoss %> </span>
+  <div class="flex justify-between">
+    <h1 class="">
+      <span class="text-6xl">$<%= portfolioValue %> </span> 
+      <span class="<%= +totalProfitLoss.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600" %>">$<%= totalProfitLoss %> </span>
     </h1>
-    <button id="addButton" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
-
+    <button id="addButton" class="btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
   </div>
-  <div id="statistics">
 
-    <h3>Portfolio Yield: <span class="annual-yield"><%= portfolioYield %></span>%</h3>
-    <h3>Annual Income: $<span class="yearlyDividend"><%= annualDividend %> </span></h3>
+  <div id="statistics" class="border-2 border-gray-200 px-2 py-3 rounded-md flex justify-around text-2xl tracking-wider uppercase">
+  <div class="flex flex-col">
+    <h3 class="text-gray-500 text-lg">Portfolio Yield</h3>
+    <span class="text-2xl"><%= portfolioYield %>%</span>
+  </div>
+  <div class="flex flex-col">
+    <h3 class="text-gray-500 text-lg">Annual Income</h3>
+    <span class="text-2xl">$<%= annualDividend %> </span>
+  </div>
+    
     <!-- <h3>Real time: $<span class="realTime"></span></h3> -->
 
   </div>
   
   
 
-  <div  class="modal-container-add">
+  <div  class="modal-container" id="modal-add">
     <div class="modal">
-      <div class="close-modal">
-        <h3>Add New Holding</h3>
-        <span class="close">ⓧ</span>
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-2xl font-semibold">Add New Holding</h3>
+        <span class="cursor-pointer transition-colors hover:text-gray-400 close">ⓧ</span>
       </div>
-      <form action="/dashboard/addStock" id="form-add" method="POST">
-        <div id="error"></div>
+      <form action="/dashboard/addStock" id="form-add" method="POST" class="flex flex-col gap-2">
+        <div id="error" class="text-red-600"></div>
         <label for="ticker">Ticker</label>
-        <input type="text" name="ticker" id="ticker-add" placeholder="ex. AAPL" required>
+        <input type="text" name="ticker" id="ticker-add" placeholder="ex. AAPL" class="input mb-4" required>
         <label for="shares">Number of Shares</label>
-        <input type="text" name="shares" id="shares-add" placeholder="Number of shares" required>
+        <input type="text" name="shares" id="shares-add" placeholder="Number of shares" class="input mb-4" required>
         <label for="basis">Average Cost</label>
-        <input type="text" name="basis" id="basis-add" placeholder="Cost Basis" required>
+        <input type="text" name="basis" id="basis-add" placeholder="Cost Basis" class="input mb-4" required>
         <button type="submit" id="addStock" class="btn btn-primary">Add</button>
       </form> 
     </div>
   </div>
 
-  <div class="modal-container-edit">
+  <div class="modal-container" id="modal-edit">
     <div class="modal">
-      <div class="close-modal">
-        <h3>Edit Holding</h3>
-        <span class="close">ⓧ</span>
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-2xl font-semibold">Edit Holding</h3>
+        <span class="cursor-pointer transition-colors hover:text-gray-400 close">ⓧ</span>
       </div>
-      <form id="form-edit" method="POST">
+      <form id="form-edit" method="POST" class="flex flex-col gap-2">
         <div id="error"></div>
         <label for="ticker">Ticker</label>
-        <input type="text" name="ticker" id="ticker-edit" required>
+        <input type="text" name="ticker" id="ticker-edit" class="input mb-4" required>
         <label for="shares">Number of Shares</label>
-        <input type="text" name="shares" id="shares-edit" required>
+        <input type="text" name="shares" id="shares-edit" class="input mb-4" required>
         <label for="basis">Average Cost</label>
-        <input type="text" name="basis" id="basis-edit" required>
+        <input type="text" name="basis" id="basis-edit" class="input mb-4" required>
         <button type="submit" id="addStock" class="btn btn-primary">Update</button>
       </form>
     </div>
   </div>
 
-  <table id="stockTable">
+  <table id="stockTable" class="border-collapse w-full bg-white rounded-lg overflow-hidden shadow-md">
     <thead>
-      <tr>
-        <th class="wide-cell">
+      <tr class="bg-indigo-500 text-slate-100 text-left font-semibold">
+        <th class="px-3 py-2">
           Ticker
         </th>
-        <th class="normal-cell">
+        <th class="px-3 py-2">
           Shares
         </th>
-        <th class="normal-cell">
+        <th class="px-3 py-2">
           Basis
         </th>
-        <th class="normal-cell">
+        <th class="px-3 py-2">
           Change
         </th>
-        <th class="normal-cell">
+        <th class="px-3 py-2">
           Current Price
         </th>
-        <th class="normal-cell">
+        <th class="px-3 py-2">
           Profit/Loss
         </th>
-        <th class="normal-cell">
+        <th class="px-3 py-2">
           Dividend
         </th>
-        <th class="normal-cell">
+        <th class="px-3 py-2">
           Edit / Delete
         </th>
       </tr>
@@ -104,45 +111,50 @@
 
       <% for(let i = 0; i < stocks.length; i++) { %>
         <tr class="row">
-          <td id="stockName">
+          <td id="stockName" class="tracking-wide px-3 py-2">
             <div id="symbol">
-              <a href="/stock/<%= stocks[i].ticker %>" ><%= stocks[i].ticker %></a> 
+              <a href="/stock/<%= stocks[i].ticker %>" class="underline hover:text-gray-400 transition-colors"><%= stocks[i].ticker %></a> 
             </div>
             <div id="corporation" class="sm-txt">
               <%= stocks[i].name %> 
             </div>
           </td>
-          <td>
+          <td class="tracking-wide px-3 py-2">
             <span class="hidden"><%= stocks[i].shares %> </span>
             <%= stocks[i].shares.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
           </td>
-          <td>
+          <td class="tracking-wide px-3 py-2">
             $<%= stocks[i].basis.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
           </td>
-          <td>
+          <td class="tracking-wide px-3 py-2">
             <span >$<%= stocks[i].change %></span>
-            <span class=<%= stocks[i].changesPercentage > 0 ? "txt-green" : "txt-red"%>>
+            <span class=<%= stocks[i].changesPercentage > 0 ? "text-green-600" : "text-red-600"%>>
               (<%= stocks[i].changesPercentage %>%)
             </span> 
           </td>
-          <td>
+          <td class="tracking-wide px-3 py-2">
             $<%= stocks[i].currentPrice %> 
           </td>
-          <td class=<%= +stocks[i].profitTotal.replaceAll(',', '') > 0 ? "txt-green" : "txt-red"%>>
+          <td class="<%= +stocks[i].profitTotal.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600"%> tracking-wide"">
             $<%= stocks[i].profitTotal %> 
           </td>
-          <td>
+          <td class="tracking-wide px-3 py-2">
             <%= stocks[i].dividendYield > 0 ? stocks[i].dividendYield + '%' : '-' %> 
           </td>
-          <td>
+          <td class="tracking-wide px-3 py-2">
             
-            <div class="control-buttons">
+            <div class="flex justify-center gap-3">
              
-              <a class="new-transaction"><i class="fa-solid fa-plus"></i></a>
-              <a class="edit-stock" data-id="<%= stocks[i].id %> "><i class="fa-solid fa-pen-to-square editButton"></i></a>
+              <!-- <a class="new-transaction">
+                <i class="fa-solid fa-plus"></i>
+              </a> -->
+
+              <a id="edit-stock" data-id="<%= stocks[i].id %> ">
+                <i class="fa-solid fa-pen-to-square cursor-pointer transition-colors hover:text-gray-400"></i>
+              </a>
 
               <form action="/dashboard/deleteStock/<%= stocks[i].id %>?_method=DELETE" method="POST">
-                <button type="submit" class="deleteButton"><i class="fa-solid fa-trash"></i></button>
+                <button type="submit" class="deleteButton"><i class="fa-solid fa-trash text-red-600 hover:text-red-400 transition-colors"></i></button>
               </form>
 
               

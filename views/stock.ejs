@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="/css/stocks.css">  -->
+  <link rel="stylesheet" href="/css/stocks.css"> 
   <link rel="stylesheet" href="/css/styles.css">
   <title>Stock</title>
 </head>
@@ -15,30 +15,38 @@
         <%- include ('./partials/header') %>
         <% } %>  
 
-    <div class="flex flex-col gap-5 container mt-12">
+    <div class="flex flex-col gap-6 container mt-12">
 
-      <div class="info flex items-center gap-5 border border-gray-300 rounded-lg px-2 py-1 bg-white">
+      <div class="flex items-center gap-6 block-card">
         
-        <div class="main-image">
+        <div>
           <% if(profile.image)  { %> 
-            <img src="<%= profile.image %> " class="ticker-image" />
+            <img src="<%= profile.image %> " class="ticker-image max-h-28" />
           <% } %> 
 
         </div>
-        <div class="main-info">
+        <div class="basis-1/4 text-center">
   
-          <h2><%= profile.companyName %></h2>
-          <h4>(<%= ticker %>)</h4>
+          <h1 class="text-3xl"><%= profile.companyName %></h1>
+          <h4 class="text-2xl font-bold">(<%= ticker %>)</h4>
           <h4>$<%= (profile.price).toLocaleString('en-US') %> </h4>
           <span>$<%= (profile.changes).toLocaleString('en-US') %> </span>
   
         </div>
   
-        <div class="dividend-info">
-  
-          <h4 class="info-header">Dividend Yield: <span class="info-data"><%= metrics.dividendYieldTTM ? divYield  : '0.00' %>% </span></h4>
-          <h4 class="info-header">Last Dividend Payout (per share): <span class="info-data">$<%= divPayout %> <%= divDate ? 'on ' + divDate : '' %> </span></h4>
-          <div>
+        <div class="flex justify-center" id="div-info">
+          <div class="px-4">
+            <h4 class="info-header">Dividend Yield</h4>
+            <span class="info-data"><%= metrics.dividendYieldTTM ? divYield  : '0.00' %>% </span>
+          </div>
+
+          <div class="px-4">
+            <h4 class="info-header">Last Dividend Payout (per share)</h4>
+            <span class="info-data">$<%= divPayout %> <%= divDate ? 'on ' + divDate : '' %> </span>
+          </div>
+          
+          
+          <div class="px-4">
             <h4 class="info-header">Dividend Frequency</h4>
             <p class="info-data">
             <% if(!metrics.dividendYieldTTM) { %> 
@@ -47,16 +55,16 @@
             <%= payoutFreq %> 
             <% } %> 
              
-          </p>
-            </div>
+            </p>
+          </div>
   
         </div>
 
       </div>
 
-      <div class="key-metrics">
-        <h2>Metrics</h2>
-        <ul class="metrics-list">
+      <div class="block-card text-center">
+        <h2 class="border-b border-gray-300 pb-4 text-3xl font-semibold">Metrics</h2>
+        <ul class="px-8 py-4">
           <% if(metrics.sector) { %>
               <li class="metric-item">
                 <span>Sector</span>
@@ -120,7 +128,7 @@
           <% if(metrics.website) { %>
             <li class="metric-item">
               <span>Website </span>
-              <a href="<%= metrics.website %>" target="_blank"><%= metrics.website %></a> 
+              <a href="<%= metrics.website %>" target="_blank" class="underline transition-colors hover:text-gray-500"><%= metrics.website %></a> 
             </li>
           <% } %> 
           
@@ -132,23 +140,24 @@
           <%= profile.description %> 
         <% } %> 
       </div>
-      <% if(user) { %>
-        <div><a href="/dashboard">Back to Dashboard</a></div>
-        <% } %> 
-      <div class="comments">
-        <h2>Discussion</h2>
+      <div class="block-card">
+        <h3>Discussion</h3>
         <ul>
           <% for(let i = 0; i < comments.length; i++) { %>
             <li class="comment">
-              <a href="/profile/<%= comments[i].user %> "> <%= commentUsers[i].name %></a>
+              <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> <%= commentUsers[i].name %></a>
               : <%= comments[i].content %> <span>Likes: <%= comments[i].likes %> </span>
               <span><%= comments[i].date.toUTCString() %> </span>
               <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
-                <button type="submit" class="like-button"><i class="fa-regular fa-thumbs-up"></i></button>
+                <button type="submit" class="like-button text-xl transition-colors hover:text-gray-500">
+                  <i class="fa-regular fa-thumbs-up"></i>
+                </button>
               </form>
               <% if(user && user.id == commentUsers[i].id) {%>
                 <form action="/stock/<%= ticker %>/deleteComment/<%= comments[i].id%>?_method=DELETE" method="POST">
-                  <button type="submit" class="delete-comment"><i class="fa-solid fa-trash"></i></button>
+                  <button type="submit" class="delete-comment text-xl transition-colors hover:text-gray-500">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
                 </form>
 
                 <% } %> 

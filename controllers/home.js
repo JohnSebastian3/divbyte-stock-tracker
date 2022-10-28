@@ -12,7 +12,8 @@ module.exports = {
     try {
       const user = await User.findById(req.params.id);
       res.render('profile.ejs', {
-        user: user,
+        profileUser: user,
+        user: req.user
       })
     } catch(err) {
       console.log(err);

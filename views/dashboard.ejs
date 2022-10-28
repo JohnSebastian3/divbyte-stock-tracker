@@ -19,18 +19,18 @@
   <div class="flex justify-between">
     <h1 class="">
       <span class="text-6xl">$<%= portfolioValue %> </span> 
-      <span class="<%= +totalProfitLoss.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600" %>">$<%= totalProfitLoss %> </span>
+      <span class="text-xl <%= +totalProfitLoss.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600" %>">$<%= totalProfitLoss %> </span>
     </h1>
     <button id="addButton" class="btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
   </div>
 
-  <div id="statistics" class="border-2 border-gray-200 px-2 py-3 rounded-md flex justify-around text-2xl tracking-wider uppercase">
+  <div id="statistics" class="border-2 border-gray-200 px-2 py-3 rounded-md flex justify-around text-2xl">
   <div class="flex flex-col">
-    <h3 class="text-gray-500 text-lg">Portfolio Yield</h3>
+    <h3 class="info-header">Portfolio Yield</h3>
     <span class="text-2xl"><%= portfolioYield %>%</span>
   </div>
   <div class="flex flex-col">
-    <h3 class="text-gray-500 text-lg">Annual Income</h3>
+    <h3 class="info-header">Annual Income</h3>
     <span class="text-2xl">$<%= annualDividend %> </span>
   </div>
     

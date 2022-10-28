@@ -11,11 +11,15 @@
 }
 
 .btn-secondary {
-  @apply text-sm border-indigo-500 border-2 px-2 rounded-lg text-indigo-500 tracking-wide font-semibold uppercase hover:bg-indigo-500 transition-colors hover:text-white;
+  @apply text-sm border-indigo-500 border-2 px-2 py-1 rounded-lg text-indigo-500 tracking-wide font-semibold uppercase hover:bg-indigo-500 transition-colors hover:text-white;
 }
 
 .card {
   @apply w-[550px] py-4 px-10 mx-auto flex gap-5 justify-center flex-col rounded-lg bg-white shadow-lg;
+}
+
+.block-card {
+  @apply border border-gray-300 rounded-lg px-8 py-4 bg-white;
 }
 
 .input {
@@ -44,5 +48,17 @@
 
 .row {
   @apply h-[100px] overflow-hidden border-slate-200 border-b-2
+}
+
+.info-header{
+  @apply tracking-wider uppercase text-sm text-gray-500;
+}
+
+.info-data {
+  @apply text-2xl ;
+}
+
+.metric-item {
+  @apply h-[45px] flex justify-between items-center;
 }
 

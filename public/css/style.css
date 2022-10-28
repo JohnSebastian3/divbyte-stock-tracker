@@ -105,7 +105,7 @@ input {
 .container {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 15px;
+  padding: 30px;
 }
 
 .box-md {
@@ -158,17 +158,6 @@ input {
   justify-content: space-between;
 }
 
-.gap-sm {
-  gap: 2rem;
-}
-
-.gap-m {
-  gap: 5rem;
-}
-
-.gap-lg {
-  gap: 10rem;
-}
 
 
 /* STYLE */
@@ -204,34 +193,6 @@ input {
   border: 5px solid rgba(34, 34, 34, 0.75);
 }
 
-.btn-primary {
-  /* background-color: #52b788; */
-  background-color: rgba(34,34,34,0.9);;
-  border: 3px solid rgba(34,34,34,0.9);;
-  color: #fafafa;
-  transition: background-color 200ms;
-}
-
-.btn-primary:hover {
-  /* background-color: #74c69d; */
-  background-color: #fafafa;
-  color:rgba(34,34,34,0.9);;
-  border: 3px solid black;
-  
-}
-
-.btn-secondary {
-  background-color: transparent;
-  /* border: 2px solid #52b788; */
-  border: 2px solid rgba(34,34,34,0.9);;
-  transition: background-color 200ms, color 200ms;
-}
-
-.btn-secondary:hover {
-  /* background-color: #52b788; */
-  background-color: rgba(34,34,34,0.9);
-  color: #fafafa;
-}
 
 .btn-transparent {
   background-color: transparent;

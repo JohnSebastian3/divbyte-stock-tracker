@@ -4,17 +4,51 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
   <title>Document</title>
 </head>
-<body>
+<body class="body">
+  <% if(user) { %>
+    <%-include ('./partials/header-logged', locals) %>
+    <% } else { %>
+      <%- include ('./partials/header') %>
+      <% } %>  
   <div class="container">
-    <h1><%= user.name %>'s Profile </h1>
-    <h4>Number of Stocks: <%= user.stocks %> </h4>
-    <h4>User Score: <%= user.userScore %> </h4>
-    <h4>Joined: <%= user.date.toUTCString() %> </h4>
+    <div class="flex gap-12 mt-40 max-w-[1000px] mx-auto block-card">
+      <div class="bg-gray-800 rounded-full w-[150px] h-[150px]">
+
+      </div>
+      <div id="profile-stats" class="flex flex-col gap-3 grow">
+        <div class="flex justify-between items-center">
+          <h1 class="text-5xl "><%= profileUser.name %></h1>
+          
+          <% if(user) {%>
+            <% if(user.id == profileUser.id) {%> 
+              <div><button type="button" class="btn-secondary">Edit Profile</button></div>
+            <% } %> 
+          <% } %>  
+          
+        </div>
+        <div class="flex gap-10">
+          <div class="flex flex-col">
+            <h2 class="info-header">Stocks</h2>
+            <span class="info-data"><%= profileUser.stocks %> </span>
+          </div>
+          <div>
+            <h2 class="info-header">User Score</h2>
+            <span class="info-data"><%= profileUser.userScore %> </span>
+          </div>
+          <div>
+            <h2 class="info-header">Join Date</h2>
+            <span class="info-data"><%= profileUser.date.toUTCString() %></span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <a href="/dashboard">Back to Dashboard</a>
   
   
 </body>

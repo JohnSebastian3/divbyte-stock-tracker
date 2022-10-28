@@ -114,7 +114,7 @@ module.exports = {
         metrics: keyMetrics,
         comments: comments,
         commentUsers: users,
-        currentUser: req.user
+        user: req.user,
       });
 
     }

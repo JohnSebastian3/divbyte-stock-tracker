@@ -16,12 +16,14 @@
     <!-- <h2 class="text-6xl"><%= user.name %>'s Portfolio</h2> -->
     <!-- <a href="/profile/<%= user.id %>" class="text-3xl">My Profile</a> -->
 
-  <div class="flex justify-between">
+  <div class="flex justify-between items-center">
     <h1 class="">
       <span class="text-6xl">$<%= portfolioValue %> </span> 
       <span class="text-xl <%= +totalProfitLoss.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600" %>">$<%= totalProfitLoss %> </span>
     </h1>
-    <button id="addButton" class="btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
+    <div>
+      <button id="addButton" class="btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
+    </div>
   </div>
 
   <div id="statistics" class="border-2 border-gray-200 px-2 py-3 rounded-md flex justify-around text-2xl">

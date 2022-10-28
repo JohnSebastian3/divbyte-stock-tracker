@@ -8,10 +8,9 @@ const sharesEdit = document.querySelector('#shares-edit');
 const basisEdit = document.querySelector('#basis-edit');
 const errorElement = document.querySelector('#error');
 
-console.log('form edit', formEdit);
 
-const modalContainerAdd = document.querySelector('.modal-container-add');
-const modalContainerEdit = document.querySelector('.modal-container-edit');
+const modalContainerAdd = document.querySelector('#modal-add');
+const modalContainerEdit = document.querySelector('#modal-edit');
 
 const addButton = document.querySelector('#addButton');
 addButton.addEventListener('click', () => {
@@ -27,7 +26,7 @@ closeButtons.forEach(button => {
   })
 })
   
-const editStockButtons = document.querySelectorAll('.edit-stock');
+const editStockButtons = document.querySelectorAll('#edit-stock');
 editStockButtons.forEach(button => {
   button.addEventListener('click', () => {
     modalContainerEdit.classList.add('show');

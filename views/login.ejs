@@ -4,29 +4,31 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/login.css">
+  <!-- <link rel="stylesheet" href="/css/login.css"> -->
+  <link rel="stylesheet" href="/css/styles.css">
   <title>Document</title>
 </head>
-<body>
-  <div class="container auto-margin flex gap-lg dir-col justify-ct vh-stretch">
+<body class="flex flex-col justify-center body">
+  <%- include ('./partials/header') %>
+  <div class="mx-auto flex flex-col justify-center h-screen gap-20 container">
 
     
     <!-- <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h1> -->
-    <div class="box-sm auto-margin flex justify-ar align-ct dir-col white border-bl">
+    <div class="card">
       
       <div>
-        <h1 id="heading-main" class="weight-b text-ct h1-large">Sign in</h1>
+        <h1 id="heading-main" class="text-center text-3xl font-semibold text-indigo-500">Sign in</h1>
   
       </div>
       <%- include ('./partials/messages') %>
-            <form action="/login" method="POST" id="register">
+            <form action="/login" method="POST" id="register" class="flex flex-col gap-4">
               <div class="form-group">
                 <label for="email">Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  class="form-control"
+                  class="input"
                   placeholder="Enter Email"
                 />
               </div>
@@ -36,14 +38,16 @@
                   type="password"
                   id="password"
                   name="password"
-                  class="form-control"
+                  class="input"
                   placeholder="Enter Password"
                 />
               </div>
-              <button type="submit" class="btn btn-primary w-stretch">Login</button>
+              <div class="flex justify-center">
+                <button type="submit" class="btn-primary mt-3 basis-full hover:bg-indigo-400">Login</button>
+              </div>
             </form>
-            <p class="lead mt-4">
-              No Account? <a href="/">Register here</a>
+            <p class="text-2xl text-center mt-1">
+              No Account? <a href="/" class="link">Register here</a>
             </p>
   
   

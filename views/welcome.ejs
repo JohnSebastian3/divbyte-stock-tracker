@@ -9,20 +9,20 @@
 
   <title>DivByte - Portfolio Manager </title>
 </head>
-<body class="flex flex-col justify-center body">
+<body class="flex flex-col justify-center body gap-14 sm:gap-20">
   <%- include ('./partials/header') %>
   <div class="mx-auto flex flex-col justify-center gap-20 container">
     <div class="text-center flex flex-col gap-12">
-      <h1 id="heading-main" class="text-7xl font-semibold text-indigo-500">The Simple & Elegant Portfolio Tracker App</h1>
-      <p class="text-4xl">Stay Up to Date with the Performance and Dividend Income of Your Portfolio</p>
+      <h1 id="heading-main" class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-indigo-500">The Simple & Elegant Portfolio Tracker App</h1>
+      <p class="text-2xl sm:text-3xl lg:text-4xl">Stay Up to Date with the Performance and Dividend Income of Your Portfolio</p>
     </div>
 
     <div class="card">
-      <h2 class="text-3xl text-center font-semibold text-indigo-500">Create Your Account</h2>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl text-center font-semibold text-indigo-500">Create Your Account</h2>
       <%- include ('./partials/messages') %>
       <form action="/register" method="POST" id="register" class="flex flex-col gap-4">
         <div class="flex flex-col gap-1">
-          <label for="name" class="text-xl">Name</label>
+          <label for="name" class="text-base sm:text-xl">Name</label>
           <input
             type="name"
             id="name"
@@ -33,7 +33,7 @@
           />
         </div>
         <div class="flex flex-col gap-1">
-          <label for="email" class="text-xl">Email</label>
+          <label for="email" class="text-base sm:text-xl">Email</label>
           <input
             type="email"
             id="email"
@@ -44,7 +44,7 @@
           />
         </div>
         <div class="flex flex-col gap-1">
-          <label for="password" class="text-xl">Password</label>
+          <label for="password" class="text-base sm:text-xl">Password</label>
           <input
             type="password"
             id="password"
@@ -55,7 +55,7 @@
           />
         </div>
         <div class="flex flex-col gap-1">
-          <label for="password2" class="text-xl">Confirm Password</label>
+          <label for="password2" class="text-base sm:text-xl">Confirm Password</label>
           <input
             type="password"
             id="password2"
@@ -72,7 +72,7 @@
         </div>
       </form>
 
-      <p class="text-2xl text-center">Have an account? <a href="/login" class="link">Login Here</a></p>
+      <p class="text-sm sm:text-xl text-center">Have an account? <a href="/login" class="link">Login Here</a></p>
     </div>
     </div>
     <%- include ('./partials/footer') %>

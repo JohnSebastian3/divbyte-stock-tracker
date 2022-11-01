@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const dayjs = require('dayjs')
+
 
 const CommentSchema = new mongoose.Schema({
   content: {
@@ -22,8 +24,8 @@ const CommentSchema = new mongoose.Schema({
     ref: 'User'
   },
   date: {
-    type: Date,
-    default: Date.now
+    type: String,
+    default: dayjs().format()
   }
 })
 

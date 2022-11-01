@@ -9,6 +9,7 @@
   <title>Stock</title>
 </head>
   <body class="body">
+
     <% if(user) { %>
       <%-include ('./partials/header-logged', locals) %>
       <% } else { %>
@@ -148,28 +149,33 @@
               <div id="profile-picture">
                 <div class="bg-gray-800 rounded-full w-[50px] h-[50px]"></div>
               </div>
-              <div id="comment-content">
+              <div id="comment-content" class="w-full">
                 <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> 
                   <%= commentUsers[i].name %>
                 </a>
-                <div>
-                  <%= comments[i].content %> 
-                </div>
-                <span>Likes: <%= comments[i].likes %> </span>
-                <span><%= comments[i].date.toUTCString() %> </span>
-                <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
-                  <button type="submit" class="like-button text-xl transition-colors hover:text-gray-500">
-                    <i class="fa-regular fa-thumbs-up"></i>
-                  </button>
-                </form>
+                <span><%= commentDates[i] %> </span>
                 <% if(user && user.id == commentUsers[i].id) {%>
-                  <form action="/stock/<%= ticker %>/deleteComment/<%= comments[i].id%>?_method=DELETE" method="POST">
-                    <button type="submit" class="delete-comment text-xl transition-colors hover:text-gray-500">
-                      <i class="fa-solid fa-trash"></i>
+                  <form action="/stock/<%= ticker %>/deleteComment/<%= comments[i].id%>?_method=DELETE" method="POST" class="inline">
+                    <button type="submit" class="delete-comment text-sm text-indigo-500 transition-colors hover:text-indigo-300">
+                      <!-- <i class="fa-solid fa-trash"></i> -->
+                      Delete
                     </button>
                   </form>
   
                   <% } %> 
+                <div class="py-2">
+                  <%= comments[i].content %> 
+                </div>
+                <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
+                  <div id="likes-container">
+                    <button type="submit" class="like-button text-sm transition-colors hover:text-gray-500">
+                      <!-- <i class="fa-regular fa-thumbs-up"></i> -->
+                      <i class="fa-solid fa-angle-up"></i>
+                    </button>
+                    <span><%= comments[i].likes %></span>
+                  </div>
+                </form>
+                
 
               </div>
             </li>
@@ -178,7 +184,7 @@
       </div>
   
       <div>
-        <span>What do you think of <%= ticker %>? Leave a comment:</span>
+        <span>Join the Discussion</span>
         <form action="/stock/<%= ticker %>/addComment " method="POST">
           <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
           <button type="submit" class="btn-primary">Submit</button>

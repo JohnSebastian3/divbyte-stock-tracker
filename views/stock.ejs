@@ -140,27 +140,33 @@
           <%= profile.description %> 
         <% } %> 
       </div>
+      <h3>Discussion</h3>
       <div class="block-card">
-        <h3>Discussion</h3>
         <ul>
           <% for(let i = 0; i < comments.length; i++) { %>
-            <li class="comment">
-              <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> <%= commentUsers[i].name %></a>
-              : <%= comments[i].content %> <span>Likes: <%= comments[i].likes %> </span>
-              <span><%= comments[i].date.toUTCString() %> </span>
-              <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
-                <button type="submit" class="like-button text-xl transition-colors hover:text-gray-500">
-                  <i class="fa-regular fa-thumbs-up"></i>
-                </button>
-              </form>
-              <% if(user && user.id == commentUsers[i].id) {%>
-                <form action="/stock/<%= ticker %>/deleteComment/<%= comments[i].id%>?_method=DELETE" method="POST">
-                  <button type="submit" class="delete-comment text-xl transition-colors hover:text-gray-500">
-                    <i class="fa-solid fa-trash"></i>
+            <li class="comment flex gap-3">
+              <div id="profile-picture">
+                <div class="bg-gray-800 rounded-full w-[50px] h-[50px]"></div>
+              </div>
+              <div id="comment-content">
+                <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> <%= commentUsers[i].name %></a>
+                <%= comments[i].content %> <span>Likes: <%= comments[i].likes %> </span>
+                <span><%= comments[i].date.toUTCString() %> </span>
+                <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
+                  <button type="submit" class="like-button text-xl transition-colors hover:text-gray-500">
+                    <i class="fa-regular fa-thumbs-up"></i>
                   </button>
                 </form>
+                <% if(user && user.id == commentUsers[i].id) {%>
+                  <form action="/stock/<%= ticker %>/deleteComment/<%= comments[i].id%>?_method=DELETE" method="POST">
+                    <button type="submit" class="delete-comment text-xl transition-colors hover:text-gray-500">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </form>
+  
+                  <% } %> 
 
-                <% } %> 
+              </div>
             </li>
             <% } %> 
           </ul>

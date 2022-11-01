@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .body {
-  @apply text-gray-700 bg-slate-100 text-lg;
+  @apply text-gray-700 bg-slate-100 text-lg select-none;
 }
 
 .btn-primary {
@@ -15,7 +15,7 @@
 }
 
 .card {
-  @apply w-[550px] py-4 px-10 mx-auto flex gap-5 justify-center flex-col rounded-lg bg-white shadow-lg;
+  @apply w-11/12 py-4 px-10 mx-auto flex gap-5 justify-center flex-col rounded-lg bg-white shadow-lg;
 }
 
 .block-card {

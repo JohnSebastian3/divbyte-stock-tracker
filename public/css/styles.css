@@ -644,10 +644,6 @@ video {
   margin-bottom: 0.25rem;
 }
 
-.mt-5 {
-  margin-top: 1.25rem;
-}
-
 .inline {
   display: inline;
 }
@@ -1009,6 +1005,9 @@ video {
 }
 
 .body {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
   font-size: 1.125rem;
@@ -1071,7 +1070,7 @@ video {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  width: 550px;
+  width: 91.666667%;
   flex-direction: column;
   justify-content: center;
   gap: 1.25rem;

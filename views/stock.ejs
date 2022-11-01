@@ -149,8 +149,13 @@
                 <div class="bg-gray-800 rounded-full w-[50px] h-[50px]"></div>
               </div>
               <div id="comment-content">
-                <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> <%= commentUsers[i].name %></a>
-                <%= comments[i].content %> <span>Likes: <%= comments[i].likes %> </span>
+                <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> 
+                  <%= commentUsers[i].name %>
+                </a>
+                <div>
+                  <%= comments[i].content %> 
+                </div>
+                <span>Likes: <%= comments[i].likes %> </span>
                 <span><%= comments[i].date.toUTCString() %> </span>
                 <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
                   <button type="submit" class="like-button text-xl transition-colors hover:text-gray-500">

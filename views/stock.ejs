@@ -141,11 +141,11 @@
           <%= profile.description %> 
         <% } %> 
       </div>
-      <h3>Discussion</h3>
       <div class="block-card">
+        <h3 class="text-center text-3xl font-semibold mb-4">Discussion</h3>
         <ul>
           <% for(let i = 0; i < comments.length; i++) { %>
-            <li class="comment flex gap-3">
+            <li class="comment flex gap-3 mb-8">
               <div id="profile-picture">
                 <div class="bg-gray-800 rounded-full w-[50px] h-[50px]"></div>
               </div>
@@ -168,12 +168,13 @@
                 </div>
                 <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
                   <div id="likes-container">
-                    <button type="submit" class="like-button text-sm transition-colors hover:text-gray-500">
-                      <!-- <i class="fa-regular fa-thumbs-up"></i> -->
-                      <i class="fa-solid fa-angle-up"></i>
+                    <button type="submit" class="like-button text-lg transition-colors hover:text-gray-500">
+                      <i class="fa-regular fa-thumbs-up"></i>
+                      <!-- <i class="fa-solid fa-angle-up"></i> -->
                     </button>
                     <span><%= comments[i].likes %></span>
                   </div>
+                  <button>Reply</button>
                 </form>
                 
 
@@ -183,12 +184,20 @@
           </ul>
       </div>
   
-      <div>
-        <span>Join the Discussion</span>
-        <form action="/stock/<%= ticker %>/addComment " method="POST">
-          <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-          <button type="submit" class="btn-primary">Submit</button>
-        </form>
+      <div class="text-center flex flex-col gap-6">
+        <span class="text-3xl font-semibold py-4 border-t border-gray-300">Join the Discussion</span>
+        <div class="flex gap-4">
+          <div id="profile-picture">
+            <div class="bg-gray-800 rounded-full w-[75px] h-[75px]"></div>
+          </div>
+          <form action="/stock/<%= ticker %>/addComment " method="POST" class="w-full">
+            <textarea name="comment" id="comment" cols="30" rows="3" class="block-card w-full focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"></textarea>
+            <div class="flex justify-start">
+              <button type="submit" class="btn-secondary">Submit</button>
+            </div>
+          </form>
+
+        </div>
       </div>
 
       

@@ -2,6 +2,32 @@ const axios = require("axios");
 const mongoose = require('mongoose');
 const Comment = require('../models/Comment');
 const User = require('../models/User');
+const dayjs = require('dayjs')
+const relativeTime = require('dayjs/plugin/relativeTime')
+const updateLocale = require('dayjs/plugin/updateLocale')
+dayjs.extend(updateLocale);
+
+dayjs.updateLocale('en', {
+  relativeTime: {
+    future: "in %s",
+    past: "%s ago",
+    s: 'a few seconds',
+    m: "a minute",
+    mm: "%d minutes",
+    h: "an hour",
+    hh: "%d hours",
+    d: "a day",
+    dd: "%d days",
+    M: "a month",
+    MM: "%d months",
+    y: "a year",
+    yy: "%d years"
+  }
+})
+
+dayjs.extend(relativeTime);
+
+
 
 module.exports = {
   getStock: async (req, res) => {
@@ -98,9 +124,13 @@ module.exports = {
 
       const comments = await Comment.find({ticker: req.params.ticker});
       const users = [];
+      const dates = [];
       for(let i = 0; i < comments.length; i++) {
         const currUser = await User.findById(comments[i].user);
         users.push(currUser);
+      
+        const timeSince = dayjs(comments[i].date).from(dayjs().format());
+        dates.push(timeSince);
       } 
       
       res.render('stock.ejs', {
@@ -114,6 +144,7 @@ module.exports = {
         metrics: keyMetrics,
         comments: comments,
         commentUsers: users,
+        commentDates: dates,
         user: req.user,
       });
 
@@ -128,7 +159,7 @@ module.exports = {
         content: req.body.comment,
         likes: 0,
         ticker: req.params.ticker,
-        user: req.user.id,
+        user: req.user.id
       });
       res.redirect(`/stock/${req.params.ticker}`);
     } catch(err) {

@@ -9,6 +9,7 @@
   <title>Stock</title>
 </head>
   <body class="body">
+
     <% if(user) { %>
       <%-include ('./partials/header-logged', locals) %>
       <% } else { %>
@@ -140,31 +141,42 @@
           <%= profile.description %> 
         <% } %> 
       </div>
-      <h3>Discussion</h3>
       <div class="block-card">
+        <h3 class="text-center text-3xl font-semibold mb-4">Discussion</h3>
         <ul>
           <% for(let i = 0; i < comments.length; i++) { %>
-            <li class="comment flex gap-3">
+            <li class="comment flex gap-3 mb-8">
               <div id="profile-picture">
                 <div class="bg-gray-800 rounded-full w-[50px] h-[50px]"></div>
               </div>
-              <div id="comment-content">
-                <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> <%= commentUsers[i].name %></a>
-                <%= comments[i].content %> <span>Likes: <%= comments[i].likes %> </span>
-                <span><%= comments[i].date.toUTCString() %> </span>
-                <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
-                  <button type="submit" class="like-button text-xl transition-colors hover:text-gray-500">
-                    <i class="fa-regular fa-thumbs-up"></i>
-                  </button>
-                </form>
+              <div id="comment-content" class="w-full">
+                <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> 
+                  <%= commentUsers[i].name %>
+                </a>
+                <span><%= commentDates[i] %> </span>
                 <% if(user && user.id == commentUsers[i].id) {%>
-                  <form action="/stock/<%= ticker %>/deleteComment/<%= comments[i].id%>?_method=DELETE" method="POST">
-                    <button type="submit" class="delete-comment text-xl transition-colors hover:text-gray-500">
-                      <i class="fa-solid fa-trash"></i>
+                  <form action="/stock/<%= ticker %>/deleteComment/<%= comments[i].id%>?_method=DELETE" method="POST" class="inline">
+                    <button type="submit" class="delete-comment text-sm text-indigo-500 transition-colors hover:text-indigo-300">
+                      <!-- <i class="fa-solid fa-trash"></i> -->
+                      Delete
                     </button>
                   </form>
   
                   <% } %> 
+                <div class="py-2">
+                  <%= comments[i].content %> 
+                </div>
+                <form action="/stock/<%= ticker %>/likeComment/<%= comments[i].id%>?_method=PUT" method="POST">
+                  <div id="likes-container">
+                    <button type="submit" class="like-button text-lg transition-colors hover:text-gray-500">
+                      <i class="fa-regular fa-thumbs-up"></i>
+                      <!-- <i class="fa-solid fa-angle-up"></i> -->
+                    </button>
+                    <span><%= comments[i].likes %></span>
+                  </div>
+                  <button>Reply</button>
+                </form>
+                
 
               </div>
             </li>
@@ -172,12 +184,20 @@
           </ul>
       </div>
   
-      <div>
-        <span>What do you think of <%= ticker %>? Leave a comment:</span>
-        <form action="/stock/<%= ticker %>/addComment " method="POST">
-          <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-          <button type="submit" class="btn-primary">Submit</button>
-        </form>
+      <div class="text-center flex flex-col gap-6">
+        <span class="text-3xl font-semibold py-4 border-t border-gray-300">Join the Discussion</span>
+        <div class="flex gap-4">
+          <div id="profile-picture">
+            <div class="bg-gray-800 rounded-full w-[75px] h-[75px]"></div>
+          </div>
+          <form action="/stock/<%= ticker %>/addComment " method="POST" class="w-full">
+            <textarea name="comment" id="comment" cols="30" rows="3" class="block-card w-full focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"></textarea>
+            <div class="flex justify-start">
+              <button type="submit" class="btn-secondary">Submit</button>
+            </div>
+          </form>
+
+        </div>
       </div>
 
       

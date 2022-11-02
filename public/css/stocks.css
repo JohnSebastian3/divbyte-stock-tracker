@@ -1,12 +1,17 @@
 
+@media screen and (min-width: 768px) {
+ 
+  #div-info > *:not(:nth-child(3n)) {
+    border-right: 1px solid rgba(34,34,34,0.2);
+  } 
+}
+
 .block-card .metric-item:not(:last-child) {
   border-bottom: 1px solid rgba(34,34,34, 0.25);
 }
 
 
-#div-info > *:not(:nth-child(3n)) {
-  border-right: 1px solid rgba(34,34,34,0.2);
-} 
+
 
 
 

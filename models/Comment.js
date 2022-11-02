@@ -24,8 +24,8 @@ const CommentSchema = new mongoose.Schema({
     ref: 'User'
   },
   date: {
-    type: String,
-    default: dayjs().format()
+    type: Date,
+    default: Date.now
   }
 })
 

@@ -688,6 +688,14 @@ video {
   height: 4rem;
 }
 
+.h-\[50px\] {
+  height: 50px;
+}
+
+.h-\[40px\] {
+  height: 40px;
+}
+
 .max-h-28 {
   max-height: 7rem;
 }
@@ -706,6 +714,14 @@ video {
 
 .w-\[75px\] {
   width: 75px;
+}
+
+.w-\[50px\] {
+  width: 50px;
+}
+
+.w-\[40px\] {
+  width: 40px;
 }
 
 .max-w-\[1000px\] {
@@ -734,6 +750,10 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.items-start {
+  align-items: flex-start;
 }
 
 .items-center {
@@ -796,6 +816,10 @@ video {
   gap: 3.5rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 .overflow-x-scroll {
   overflow-x: scroll;
 }
@@ -832,6 +856,10 @@ video {
   border-top-width: 1px;
 }
 
+.border-r {
+  border-right-width: 1px;
+}
+
 .border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
@@ -855,6 +883,14 @@ video {
 .bg-gray-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .px-2 {
@@ -1232,8 +1268,26 @@ video {
 .container {
   margin-left: auto;
   margin-right: auto;
-  max-width: 1280px;
+  max-width: 42rem;
   padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 48rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 56rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 72rem;
+  }
 }
 
 .form-group {
@@ -1402,11 +1456,6 @@ video {
     line-height: 1.75rem;
   }
 
-  .sm\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -1420,6 +1469,11 @@ video {
   .sm\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
@@ -1446,8 +1500,16 @@ video {
 }
 
 @media (min-width: 1024px) {
-  .lg\:table {
-    display: table;
+  .lg\:grow {
+    flex-grow: 1;
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
+  .lg\:items-start {
+    align-items: flex-start;
   }
 
   .lg\:gap-4 {
@@ -1469,11 +1531,6 @@ video {
     line-height: 2rem;
   }
 
-  .lg\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
   .lg\:text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -1491,6 +1548,10 @@ video {
 }
 
 @media (min-width: 1280px) {
+  .xl\:table {
+    display: table;
+  }
+
   .xl\:flex-row {
     flex-direction: row;
   }
@@ -1515,11 +1576,6 @@ video {
   .xl\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
-  }
-
-  .xl\:text-4xl {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
   }
 
   .xl\:text-2xl {

@@ -27,7 +27,7 @@
 }
 
 .container {
-  @apply max-w-screen-xl mx-auto p-2;
+  @apply max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto p-2 ;
 }
 
 .form-group {

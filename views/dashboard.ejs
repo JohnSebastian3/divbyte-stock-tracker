@@ -29,11 +29,11 @@
   <div id="statistics" class="border-2 border-gray-200 px-2 py-3 rounded-md flex flex-col sm:flex-row justify-around">
   <div class="flex flex-col gap-1 items-center border-gray-200 border-b sm:border-0 px-1 py-2">
     <h3 class="info-header">Portfolio Yield</h3>
-    <span class="text-lg sm:text-2xl lg:text-3xl xl:text-4xl"><%= portfolioYield %>%</span>
+    <span class="info-data"><%= portfolioYield %>%</span>
   </div>
   <div class="flex flex-col gap-1 px-1 py-2 items-center">
     <h3 class="info-header">Annual Income</h3>
-    <span class="text-lg sm:text-2xl lg:text-3xl xl:text-4xl">$<%= annualDividend %> </span>
+    <span class="info-data">$<%= annualDividend %> </span>
   </div>
     
     <!-- <h3>Real time: $<span class="realTime"></span></h3> -->
@@ -81,7 +81,7 @@
   </div>
 
  
-    <table id="stockTable" class="lg:text-lg mx-auto border-collapse overflow-x-scroll whitespace-nowrap  w-full block lg:table h-auto bg-white rounded-lg shadow-md">
+    <table id="stockTable" class="lg:text-lg mx-auto border-collapse overflow-x-scroll whitespace-nowrap xl:table w-full block h-auto bg-white rounded-lg shadow-md">
       <thead class="">
         <tr class="bg-indigo-500 text-slate-100 text-left font-semibold">
           <th class="px-4 py-3">

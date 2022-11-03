@@ -11,29 +11,29 @@
 <body class="body">
   <%- include ('./partials/header-logged', locals) %>
 
-  <div class="container flex flex-col mt-14 h-screen gap-10">
+  <div class="container flex flex-col mt-14 mb-14 h-auto gap-10">
 
     <!-- <h2 class="text-6xl"><%= user.name %>'s Portfolio</h2> -->
     <!-- <a href="/profile/<%= user.id %>" class="text-3xl">My Profile</a> -->
 
-  <div class="flex justify-between items-center">
-    <h1 class="">
-      <span class="text-6xl">$<%= portfolioValue %> </span> 
-      <span class="text-xl <%= +totalProfitLoss.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600" %>">$<%= totalProfitLoss %> </span>
-    </h1>
+  <div class="flex flex-col xl:flex-row gap-5 justify-between items-center">
+    <div class="flex flex-col xl:flex-row items-center xl:items-end xl:gap-2">
+      <span class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">$<%= portfolioValue %> </span> 
+      <span class="text-lg sm:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl <%= +totalProfitLoss.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600" %>">$<%= totalProfitLoss %> </span>
+    </div>
     <div>
       <button id="addButton" class="btn-secondary"><i class="fa-solid fa-plus"></i> New Holding</button>
     </div>
   </div>
 
-  <div id="statistics" class="border-2 border-gray-200 px-2 py-3 rounded-md flex justify-around text-2xl">
-  <div class="flex flex-col">
+  <div id="statistics" class="border-2 border-gray-200 px-2 py-3 rounded-md flex flex-col sm:flex-row justify-around">
+  <div class="flex flex-col gap-1 items-center border-gray-200 border-b sm:border-0 px-1 py-2">
     <h3 class="info-header">Portfolio Yield</h3>
-    <span class="text-2xl"><%= portfolioYield %>%</span>
+    <span class="info-data"><%= portfolioYield %>%</span>
   </div>
-  <div class="flex flex-col">
+  <div class="flex flex-col gap-1 px-1 py-2 items-center">
     <h3 class="info-header">Annual Income</h3>
-    <span class="text-2xl">$<%= annualDividend %> </span>
+    <span class="info-data">$<%= annualDividend %> </span>
   </div>
     
     <!-- <h3>Real time: $<span class="realTime"></span></h3> -->
@@ -80,101 +80,103 @@
     </div>
   </div>
 
-  <table id="stockTable" class="border-collapse w-full bg-white rounded-lg overflow-hidden shadow-md">
-    <thead>
-      <tr class="bg-indigo-500 text-slate-100 text-left font-semibold">
-        <th class="px-3 py-2">
-          Ticker
-        </th>
-        <th class="px-3 py-2">
-          Shares
-        </th>
-        <th class="px-3 py-2">
-          Basis
-        </th>
-        <th class="px-3 py-2">
-          Change
-        </th>
-        <th class="px-3 py-2">
-          Current Price
-        </th>
-        <th class="px-3 py-2">
-          Profit/Loss
-        </th>
-        <th class="px-3 py-2">
-          Dividend
-        </th>
-        <th class="px-3 py-2">
-          Edit / Delete
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <% for(let i = 0; i < stocks.length; i++) { %>
-        <tr class="row">
-          <td id="stockName" class="tracking-wide px-3 py-2">
-            <div id="symbol">
-              <a href="/stock/<%= stocks[i].ticker %>" class="underline hover:text-gray-400 transition-colors"><%= stocks[i].ticker %></a> 
-            </div>
-            <div id="corporation" class="sm-txt">
-              <%= stocks[i].name %> 
-            </div>
-          </td>
-          <td class="tracking-wide px-3 py-2">
-            <span class="hidden"><%= stocks[i].shares %> </span>
-            <%= stocks[i].shares.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
-          </td>
-          <td class="tracking-wide px-3 py-2">
-            $<%= stocks[i].basis.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
-          </td>
-          <td class="tracking-wide px-3 py-2">
-            <span >$<%= stocks[i].change %></span>
-            <span class=<%= stocks[i].changesPercentage > 0 ? "text-green-600" : "text-red-600"%>>
-              (<%= stocks[i].changesPercentage %>%)
-            </span> 
-          </td>
-          <td class="tracking-wide px-3 py-2">
-            $<%= stocks[i].currentPrice %> 
-          </td>
-          <td class="<%= +stocks[i].profitTotal.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600"%> tracking-wide"">
-            $<%= stocks[i].profitTotal %> 
-          </td>
-          <td class="tracking-wide px-3 py-2">
-            <%= stocks[i].dividendYield > 0 ? stocks[i].dividendYield + '%' : '-' %> 
-          </td>
-          <td class="tracking-wide px-3 py-2">
-            
-            <div class="flex justify-center gap-3">
-             
-              <!-- <a class="new-transaction">
-                <i class="fa-solid fa-plus"></i>
-              </a> -->
-
-              <a id="edit-stock" data-id="<%= stocks[i].id %> ">
-                <i class="fa-solid fa-pen-to-square cursor-pointer transition-colors hover:text-gray-400"></i>
-              </a>
-
-              <form action="/dashboard/deleteStock/<%= stocks[i].id %>?_method=DELETE" method="POST">
-                <button type="submit" class="deleteButton"><i class="fa-solid fa-trash text-red-600 hover:text-red-400 transition-colors"></i></button>
-              </form>
-
-              
-              
-            </div>
-          </td>
-          <!-- Add value to total here --> 
+ 
+    <table id="stockTable" class="lg:text-lg mx-auto border-collapse overflow-x-scroll whitespace-nowrap xl:table w-full block h-auto bg-white rounded-lg shadow-md">
+      <thead class="">
+        <tr class="bg-indigo-500 text-slate-100 text-left font-semibold">
+          <th class="px-4 py-3">
+            Ticker
+          </th>
+          <th class="px-4 py-3">
+            Shares
+          </th>
+          <th class="px-4 py-3">
+            Basis
+          </th>
+          <th class="px-4 py-3">
+            Change
+          </th>
+          <th class="px-4 py-3">
+            Current Price
+          </th>
+          <th class="px-4 py-3">
+            Profit/Loss
+          </th>
+          <th class="px-4 py-3">
+            Dividend
+          </th>
+          <th class="px-4 py-3">
+            Edit / Delete
+          </th>
         </tr>
-      <% } %>
-        
-    </tbody>
-  </table>
+      </thead>
+      <tbody class="">
+  
+        <% for(let i = 0; i < stocks.length; i++) { %>
+          <tr class="row">
+            <td id="stockName" class="tracking-wide px-3 py-2">
+              <div id="symbol">
+                <a href="/stock/<%= stocks[i].ticker %>" class="underline hover:text-gray-400 transition-colors"><%= stocks[i].ticker %></a> 
+              </div>
+              <div id="corporation" class="">
+                <%= stocks[i].name %> 
+              </div>
+            </td>
+            <td class="tracking-wide px-3 py-2">
+              <span class="hidden"><%= stocks[i].shares %> </span>
+              <%= stocks[i].shares.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
+            </td>
+            <td class="tracking-wide px-3 py-2">
+              $<%= stocks[i].basis.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %> 
+            </td>
+            <td class="tracking-wide px-3 py-2">
+              <span >$<%= stocks[i].change %></span>
+              <span class=<%= stocks[i].changesPercentage > 0 ? "text-green-600" : "text-red-600"%>>
+                (<%= stocks[i].changesPercentage %>%)
+              </span> 
+            </td>
+            <td class="tracking-wide px-3 py-2">
+              $<%= stocks[i].currentPrice %> 
+            </td>
+            <td class="<%= +stocks[i].profitTotal.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600"%> tracking-wide"">
+              $<%= stocks[i].profitTotal %> 
+            </td>
+            <td class="tracking-wide px-3 py-2">
+              <%= stocks[i].dividendYield > 0 ? stocks[i].dividendYield + '%' : '-' %> 
+            </td>
+            <td class="tracking-wide px-3 py-2">
+              
+              <div class="flex justify-center gap-3">
+               
+                <!-- <a class="new-transaction">
+                  <i class="fa-solid fa-plus"></i>
+                </a> -->
+  
+                <a id="edit-stock" data-id="<%= stocks[i].id %> ">
+                  <i class="fa-solid fa-pen-to-square cursor-pointer transition-colors hover:text-gray-400"></i>
+                </a>
+  
+                <form action="/dashboard/deleteStock/<%= stocks[i].id %>?_method=DELETE" method="POST">
+                  <button type="submit" class="deleteButton"><i class="fa-solid fa-trash text-red-600 hover:text-red-400 transition-colors"></i></button>
+                </form>
+  
+                
+                
+              </div>
+            </td>
+            <!-- Add value to total here --> 
+          </tr>
+        <% } %>
+          
+      </tbody>
+    </table>
+  
   
   <a href="/logout" class="">Logout</a>
     <script src="js/main.js"></script>
 
   </div>
-  
   <%- include ('./partials/footer') %>
+  
   </body>
 </html>

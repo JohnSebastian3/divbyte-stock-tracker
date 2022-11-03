@@ -3,23 +3,24 @@
 @tailwind utilities;
 
 .body {
-  @apply text-gray-700 bg-slate-100 text-lg select-none;
+  @apply text-gray-700 bg-slate-100 text-base sm:text-lg lg:text-xl select-none;
 }
 
 .btn-primary {
-  @apply bg-indigo-500 text-white px-3 py-2 rounded-md uppercase tracking-wide hover:bg-indigo-400 transition-colors;
+  @apply bg-indigo-500 text-sm lg:text-base 2xl:text-xl text-white px-3 py-2 rounded-md uppercase tracking-wide hover:bg-indigo-400 transition-colors;
 }
 
 .btn-secondary {
-  @apply text-sm border-indigo-500 border-2 px-2 py-1 rounded-lg text-indigo-500 tracking-wide font-semibold uppercase hover:bg-indigo-500 transition-colors hover:text-white;
+  @apply text-sm lg:text-base 2xl:text-xl border-indigo-500 border-2 px-2 py-1 rounded-lg text-indigo-500 tracking-wide font-semibold uppercase hover:bg-indigo-500 transition-colors hover:text-white;
 }
 
 .card {
-  @apply w-11/12 py-4 px-10 mx-auto flex gap-5 justify-center flex-col rounded-lg bg-white shadow-lg;
+  @apply w-11/12 sm:w-9/12 lg:w-7/12 xl:w-5/12 py-4 px-4 sm:px-6 lg:px-8 xl:px-12 mx-auto flex gap-5 justify-center flex-col rounded-lg bg-white shadow-lg;
+
 }
 
 .block-card {
-  @apply border border-gray-300 rounded-lg px-8 py-4 bg-white;
+  @apply border border-gray-300 rounded-lg px-2 md:px-4 lg:px-8 py-4 bg-white;
 }
 
 .input {
@@ -27,7 +28,7 @@
 }
 
 .container {
-  @apply max-w-screen-xl mx-auto p-3;
+  @apply max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto p-2 ;
 }
 
 .form-group {
@@ -35,7 +36,7 @@
 }
 
 .link {
-  @apply text-indigo-500 hover:text-indigo-400;
+  @apply text-indigo-500 hover:text-indigo-300 transition-colors;
 }
 
 .modal-container {
@@ -47,7 +48,7 @@
 }
 
 .row {
-  @apply h-[100px] overflow-hidden border-slate-200 border-b-2
+  @apply h-[100px] border-slate-200 border-b-2
 }
 
 .info-header{
@@ -55,7 +56,7 @@
 }
 
 .info-data {
-  @apply text-2xl ;
+  @apply text-lg sm:text-2xl lg:text-3xl;
 }
 
 .metric-item {

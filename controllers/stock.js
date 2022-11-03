@@ -129,7 +129,7 @@ module.exports = {
         const currUser = await User.findById(comments[i].user);
         users.push(currUser);
       
-        const timeSince = dayjs(comments[i].date).from(dayjs().format());
+        const timeSince = dayjs(comments[i].date).fromNow();
         dates.push(timeSince);
       } 
       

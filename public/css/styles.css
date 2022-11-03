@@ -1059,6 +1059,9 @@ video {
 }
 
 .body {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
   font-size: 1rem;

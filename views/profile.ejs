@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/profile.css">
   <title>Document</title>
 </head>
 <body class="body">
@@ -14,13 +15,13 @@
       <%- include ('./partials/header') %>
       <% } %>  
   <div class="container h-screen3">
-    <div class="flex gap-12 mt-40 max-w-[1000px] mx-auto block-card">
+    <div class="flex flex-col items-center gap-8 mt-20 mb-20 sm:mt-30 sm:mb-30 md:mt-40 md:mb-40 max-w-[1000px] mx-auto card">
       <div class="bg-gray-800 rounded-full w-[150px] h-[150px]">
 
       </div>
-      <div id="profile-stats" class="flex flex-col gap-3 grow">
-        <div class="flex justify-between items-center">
-          <h1 class="text-5xl "><%= profileUser.name %></h1>
+      <div id="profile-stats" class="flex flex-col gap-8 grow">
+        <div class="flex flex-col gap-8 justify-between items-center">
+          <h1 class="text-3xl sm:text-3xl lg:text-4xl xl:text-5xl text-center"><%= profileUser.name %></h1>
           
           <% if(user) {%>
             <% if(user.id == profileUser.id) {%> 
@@ -29,18 +30,22 @@
           <% } %>  
           
         </div>
-        <div class="flex gap-10">
-          <div class="flex flex-col">
+        <div id="profile-info" class="flex flex-col sm:flex-row border sm:border-0 sm:border-t-2 border-gray-200 justify-center py-4 rounded-md">
+          <div class="px-4 py-2 border-b border-gray-200 sm:border-0">
             <h2 class="info-header">Stocks</h2>
             <span class="info-data"><%= profileUser.stocks %> </span>
           </div>
-          <div>
+          <div class="px-4 py-2 border-b border-gray-200 sm:border-0">
             <h2 class="info-header">User Score</h2>
             <span class="info-data"><%= profileUser.userScore %> </span>
           </div>
-          <div>
+          <div class="px-4 py-2">
             <h2 class="info-header">Join Date</h2>
-            <span class="info-data"><%= profileUser.date.toUTCString() %></span>
+            <span class="info-data">
+              <%= dateJoined.month %> 
+              <%= dateJoined.day %>,
+              <%= dateJoined.year  %> 
+            </span>
           </div>
 
         </div>

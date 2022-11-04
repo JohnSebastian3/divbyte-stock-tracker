@@ -10,6 +10,7 @@ const connectDB = require('./config/db');
 const dashboardRoutes = require('./routes/dashboard');
 const indexRoutes = require('./routes/index');
 const stockRoutes = require('./routes/stock');
+const profileRoutes = require('./routes/profile');
 
 require('dotenv').config({path: './config/.env'});
 
@@ -60,6 +61,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/', indexRoutes);
+app.use('/profile', profileRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/stock', stockRoutes);
 

@@ -145,13 +145,13 @@
         <h3 class="text-center text-xl xl:text-3xl font-semibold mb-4">Discussion</h3>
         <ul>
           <% for(let i = 0; i < comments.length; i++) { %>
-            <li class="comment flex flex-col lg:flex-row gap-3 lg:items-start border-t border-gray-200 pb-6 pt-6">
+            <li class="comment flex flex-col lg:flex-row lg:items-start border-t gap-2 lg:gap-0 border-gray-200 pb-6 pt-6">
           
-              <div id="profile" class="text-sm sm:text-base flex justify-between items-center">
-                <div id="profile-info" class="flex items-center gap-2">
-                  <div class="bg-gray-800 rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px]"></div>
+              <div id="profile" class="text-sm sm:text-base flex justify-between items-center lg:basis-64">
+                <div id="profile-info" class="flex items-center gap-3">
+                  <div class="bg-gray-800 rounded-full w-[45px] h-[45px]"></div>
                   <div class="flex flex-col">
-                    <a href="/profile/<%= comments[i].user %>" class="text-indigo-500 transition-colors hover:text-indigo-300"> 
+                    <a href="/profile/<%= comments[i].user %>" class="basis-1/8 text-indigo-500 transition-colors hover:text-indigo-300"> 
                       <%= commentUsers[i].name %>
                     </a>
                     <span class="text-gray-500 text-xs sm:text-sm"><%= commentDates[i] %> </span>

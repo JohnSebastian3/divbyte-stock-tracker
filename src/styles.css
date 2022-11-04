@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .body {
-  @apply text-gray-700 bg-slate-100 text-base sm:text-lg lg:text-xl select-none;
+  @apply font-mono text-gray-700 bg-slate-100 text-base lg:text-lg select-none;
 }
 
 .btn-primary {

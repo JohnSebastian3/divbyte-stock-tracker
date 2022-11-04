@@ -18,7 +18,7 @@
 
   <div class="flex flex-col xl:flex-row gap-5 justify-between items-center">
     <div class="flex flex-col xl:flex-row items-center xl:items-end xl:gap-2">
-      <span class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">$<%= portfolioValue %> </span> 
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">$<%= portfolioValue %> </h1> 
       <span class="text-lg sm:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl <%= +totalProfitLoss.replaceAll(',', '') > 0 ? "text-green-600" : "text-red-600" %>">$<%= totalProfitLoss %> </span>
     </div>
     <div>
@@ -81,7 +81,7 @@
   </div>
 
  
-    <table id="stockTable" class="lg:text-lg mx-auto border-collapse overflow-x-scroll whitespace-nowrap xl:table w-full block h-auto bg-white rounded-lg shadow-md">
+    <table id="stockTable" class="text-sm mx-auto border-collapse overflow-x-scroll whitespace-nowrap xl:table w-full block h-auto bg-white rounded-lg shadow-md">
       <thead class="">
         <tr class="bg-indigo-500 text-slate-100 text-left font-semibold">
           <th class="px-4 py-3">

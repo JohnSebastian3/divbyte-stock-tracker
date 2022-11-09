@@ -44,7 +44,7 @@
 }
 
 .modal {
-  @apply bg-white w-[600px] max-w-full py-6 px-6 rounded-md shadow-sm;
+  @apply bg-white sm:w-[600px] w-11/12 sm:max-w-full py-6 px-6 rounded-md shadow-sm;
 }
 
 .row {

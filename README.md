@@ -4,7 +4,7 @@ Link to live project: https://divbyte.up.railway.app/
 
 ## How It's Made:
 
-**Tech used:** HTML, CSS, JavaScript, Tailwind, MongoDB, Express, NodeJS
+**Tech used:** HTML, CSS, JavaScript, EJS, Tailwind, MongoDB, Express, NodeJS
 
 Made with the MERN stack, this full-stack application allows the user to track their stocks in their portfolio, as well as have discussions with other users about individual stocks.
 

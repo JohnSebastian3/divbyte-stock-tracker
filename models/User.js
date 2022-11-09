@@ -23,6 +23,7 @@ const UserSchema = new mongoose.Schema({
   },
   profileImage: {
     type: String,
+    default: '/images/blank-profile.png'
   },
   cloudinaryId: {
     type: String,

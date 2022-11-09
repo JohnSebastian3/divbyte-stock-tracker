@@ -24,6 +24,11 @@ module.exports = {
   },
   uploadPicture: async (req, res) => {
     try {
+      // First delete current picture
+      let user = await User.findById(req.params.id); 
+      if (user.cloudinaryId) {
+        await cloudinary.uploader.destroy(user.cloudinaryId);
+      }
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
       await User.findOneAndUpdate(

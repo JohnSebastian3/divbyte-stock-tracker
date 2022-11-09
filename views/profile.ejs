@@ -16,8 +16,8 @@
       <% } %>  
   <div class="container h-screen3">
     <div class="flex flex-col items-center gap-8 mt-20 mb-20 sm:mt-30 sm:mb-30  max-w-[1000px] mx-auto card">
-      <div class="bg-gray-800 rounded-full w-[150px] h-[150px] overflow-hidden">
-        <img class="img-fluid" src="<%= profileUser.profileImage %>" />
+      <div style="background-image: url('<%= profileUser.profileImage %>') "class="bg-gray-800 rounded-full w-[175px] h-[175px] bg-center bg-cover">
+        <!-- <img class="img-fluid" src="<%= profileUser.profileImage %>" /> -->
       </div>
       <div id="profile-stats" class="flex flex-col gap-8 grow">
         <div class="flex flex-col gap-8 justify-between items-center">
@@ -34,7 +34,7 @@
             <form action="/profile/<%= profileUser.id %>/uploadPicture" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                 <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
+                <input type="file" class="form-control" id="imageUpload" name="file" required>
                 <input type="text" name="testBud">
               </div>
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>

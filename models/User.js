@@ -21,6 +21,13 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  profileImage: {
+    type: String,
+    default: '/images/blank-profile.png'
+  },
+  cloudinaryId: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now 

@@ -69,6 +69,8 @@ module.exports = {
           }
         )
         res.redirect(`/profile/${req.params.id}`);
+      } else {
+        res.redirect(`/profile/${req.params.id}`);
       }
       
     } catch (err) {

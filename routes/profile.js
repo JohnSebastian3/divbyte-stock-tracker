@@ -5,7 +5,7 @@ const profileController = require('../controllers/profile');
 
 
 router.get('/:id', profileController.getProfile);
-router.post('/:id/uploadPicture', upload.single("file"), profileController.uploadPicture);
+router.post('/:id/updateUser', upload.single("file"), profileController.updateUser);
 
 
 module.exports = router;

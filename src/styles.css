@@ -7,11 +7,11 @@
 }
 
 .btn-primary {
-  @apply bg-indigo-500 text-sm lg:text-base 2xl:text-xl text-white px-3 py-2 rounded-md uppercase tracking-wide hover:bg-indigo-400 transition-colors;
+  @apply bg-indigo-500 text-sm lg:text-base text-white px-3 py-2 rounded-md uppercase tracking-wide hover:bg-indigo-400 transition-colors;
 }
 
 .btn-secondary {
-  @apply text-sm lg:text-base 2xl:text-xl border-indigo-500 border-2 px-2 py-1 rounded-lg text-indigo-500 tracking-wide font-semibold uppercase hover:bg-indigo-500 transition-colors hover:text-white;
+  @apply text-sm lg:text-base border-indigo-500 border-2 px-2 py-1 rounded-lg text-indigo-500 tracking-wide font-semibold uppercase hover:bg-indigo-500 transition-colors hover:text-white;
 }
 
 .card {

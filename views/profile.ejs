@@ -19,26 +19,37 @@
       <div style="background-image: url('<%= profileUser.profileImage %>') "class="bg-gray-800 rounded-full w-[175px] h-[175px] bg-center bg-cover">
         <!-- <img class="img-fluid" src="<%= profileUser.profileImage %>" /> -->
       </div>
-      <div id="profile-stats" class="flex flex-col gap-8 grow">
+      <div id="profile-stats" class="flex flex-col gap-8 grow overflow-hidden">
         <div class="flex flex-col gap-8 justify-between items-center">
           <h1 class="text-3xl sm:text-3xl lg:text-4xl xl:text-5xl text-center"><%= profileUser.name %></h1>
           
           <% if(user) {%>
             <% if(user.id == profileUser.id) {%> 
-              <div><button type="button" class="btn-secondary">Edit Profile</button></div>
+              <div><button type="button" class="btn-secondary" id="edit-profile-button">Edit Profile</button></div>
             <% } %> 
           <% } %>  
           
-
-          <h2>Add a post</h2>
-            <form action="/profile/<%= profileUser.id %>/uploadPicture" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file" required>
-                <input type="text" name="testBud">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
+          <div class="hidden flex flex-col items-center gap-2 text-xs md:text-sm w-[200px] sm:w-11/12" id="edit-profile">
+              <form action="/profile/<%= profileUser.id %>/updateUser" enctype="multipart/form-data" method="POST" class="w-full" >
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input
+                    type="name"
+                    id="name"
+                    name="name"
+                    class="form-control input mb-3"
+                    placeholder="Edit Name"
+                    value="<%= typeof name != 'undefined' ? name : '' %>"
+                  />
+                </div>
+                <div class="mb-3 form-group">
+                  <label for="imgUpload" class="form-label">Image</label>
+                  <input type="file" class="form-control input" id="imageUpload" name="file">
+                </div>
+                <button type="button" class="btn btn-primary" id="cancel-button">Cancel</button>
+                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              </form>
+          </div>
           
         </div>
         <div id="profile-info" class="flex flex-col sm:flex-row border sm:border-0 sm:border-t-2 border-gray-200 justify-center py-4 rounded-md">
@@ -47,7 +58,7 @@
             <span class="info-data"><%= profileUser.stocks %> </span>
           </div>
           <div class="px-4 py-2 border-b border-gray-200 sm:border-0">
-            <h2 class="info-header">User Score</h2>
+            <h2 class="info-header">Score</h2>
             <span class="info-data"><%= profileUser.userScore %> </span>
           </div>
           <div class="px-4 py-2">
@@ -66,6 +77,6 @@
   </div>
 
   <%- include ('./partials/footer') %>
-  
+  <script src="/js/editProfile.js"></script>
 </body>
 </html>

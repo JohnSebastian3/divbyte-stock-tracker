@@ -22,26 +22,55 @@ module.exports = {
     }
     
   },
-  uploadPicture: async (req, res) => {
+  updateUser: async (req, res) => {
     try {
-      // First delete current picture
-      let user = await User.findById(req.params.id); 
-      if (user.cloudinaryId) {
-        await cloudinary.uploader.destroy(user.cloudinaryId);
-      }
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-      await User.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-          $set: {
-            profileImage: result.secure_url,
-            cloudinaryId: result.public_id
-          }
+      if(req.file && req.body.name) {
+        // delete current picture
+        let user = await User.findById(req.params.id); 
+        if (user.cloudinaryId) {
+          await cloudinary.uploader.destroy(user.cloudinaryId);
         }
-      )
-      console.log("Profile pic has been added!");
-      res.redirect(`/profile/${req.params.id}`);
+        // Upload image to cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path);
+        await User.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $set: {
+              name: req.body.name,
+              profileImage: result.secure_url,
+              cloudinaryId: result.public_id
+            }
+          }
+        )
+        res.redirect(`/profile/${req.params.id}`);
+      } else if (req.file && !req.body.name) {
+        let user = await User.findById(req.params.id); 
+        if (user.cloudinaryId) {
+          await cloudinary.uploader.destroy(user.cloudinaryId);
+        }
+        const result = await cloudinary.uploader.upload(req.file.path);
+        await User.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $set: {
+              profileImage: result.secure_url,
+              cloudinaryId: result.public_id
+            }
+          }
+        )
+        res.redirect(`/profile/${req.params.id}`);
+      } else if (!req.file && req.body.name) {
+        await User.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $set: {
+              name: req.body.name,
+            }
+          }
+        )
+        res.redirect(`/profile/${req.params.id}`);
+      }
+      
     } catch (err) {
       console.log(err);
     }

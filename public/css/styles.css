@@ -1423,8 +1423,8 @@ video {
     gap: 5rem;
   }
 
-  .sm\:gap-3 {
-    gap: 0.75rem;
+  .sm\:gap-4 {
+    gap: 1rem;
   }
 
   .sm\:border-0 {
@@ -1514,8 +1514,8 @@ video {
     gap: 0px;
   }
 
-  .lg\:gap-4 {
-    gap: 1rem;
+  .lg\:gap-5 {
+    gap: 1.25rem;
   }
 
   .lg\:px-8 {
@@ -1561,8 +1561,8 @@ video {
     gap: 0.5rem;
   }
 
-  .xl\:gap-5 {
-    gap: 1.25rem;
+  .xl\:gap-6 {
+    gap: 1.5rem;
   }
 
   .xl\:text-6xl {

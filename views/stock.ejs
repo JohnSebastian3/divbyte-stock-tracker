@@ -30,8 +30,10 @@
   
           <h1 class="text-xl xl:text-3x"><%= profile.companyName %></h1>
           <h4 class="text-lg font-bold xl:text-2xl">(<%= ticker %>)</h4>
-          <h4>$<%= (profile.price).toLocaleString('en-US') %> </h4>
-          <span>$<%= (profile.changes).toLocaleString('en-US') %> </span>
+          <h4>$<%= (profile.price).toLocaleString('en-US', {maximumFractionDigits: 2, minimumFractionDigits: 2}) %> </h4>
+          <span class="<%= profile.changes > 0 ? 'text-green-600' : 'text-red-600' %> ">
+            <%= profile.changes > 0 ? '+' : '-' %>$<%= (profile.changes).toLocaleString('en-US', {maximumFractionDigits: 2, minimumFractionDigits: 2}) %> 
+          </span>
   
         </div>
   

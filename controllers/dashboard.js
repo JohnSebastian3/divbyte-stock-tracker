@@ -66,28 +66,13 @@ module.exports = {
             if(divResponse.data.historical.length > 1) {
               // DATE DATE DATE
               pastDivInfo = divResponse.data.historical[1];
-              firstMonth = currentDivInfo.paymentDate.slice(5, 7);
-              secondMonth = pastDivInfo.paymentDate.slice(5, 7);
-            } else {
-              pastDivInfo = {};
-            }
-            
-            if(Number(firstMonth) < 10) { 
-              // Gets rid of zero at the front
-              firstMonth = Number(firstMonth.slice(1));
-            } else {
-              firstMonth = Number(firstMonth);
-            }
-      
-            if(Number(secondMonth) < 10) {
-              secondMonth = Number(secondMonth.slice(1));
-            } else {
-              secondMonth = Number(secondMonth);
-            }
+              firstMonth = Number(new Date(currentDivInfo.paymentDate).getMonth());
+              secondMonth = Number(new Date(pastDivInfo.paymentDate).getMonth());
+            } 
       
             let diff = Math.abs(firstMonth - secondMonth);
             let payoutsPerYear = 0;
-            if(diff % 12 === 0) {
+            if(Number.isNaN(parseFloat(diff))) {
               dividendFrequency = 'NA';
               payoutsPerYear = 0;
             } else if(diff % 6 === 0) {

@@ -149,8 +149,7 @@
           
               <div id="profile" class="text-sm sm:text-base flex justify-between items-center lg:basis-64">
                 <div id="profile-info" class="flex items-center gap-3">
-                  <div class="bg-gray-800 rounded-full w-[55px] h-[55px] overflow-hidden">
-                  <img src="<%= commentUsers[i].profileImage  %> " alt="profile picture"> 
+                  <div style="background-image: url('<%= commentUsers[i].profileImage %>') " class="bg-gray-800 bg-center bg-cover rounded-full w-[55px] h-[55px] overflow-hidden">
                   </div>
                   <div class="flex flex-col">
                     <a href="/profile/<%= comments[i].user %>" class="basis-1/8 text-indigo-500 transition-colors hover:text-indigo-300"> 
@@ -205,8 +204,7 @@
         <span class="text-xl xl:text-3xl font-semibold py-4 border-t border-gray-300">Join the Discussion</span>
         <div class="flex gap-4 flex-col sm:flex-row sm:items-start">
           <div id="profile-picture">
-            <div class="bg-gray-800 rounded-full w-[75px] h-[75px] overflow-hidden">
-              <img src="<%= user.profileImage  %> " alt="profile picture"> 
+            <div style="background-image: url('<%= user.profileImage %>') "class="bg-gray-800 rounded-full w-[75px] h-[75px] overflow-hidden bg-center bg-cover">
             </div>
           </div>
           <form action="/stock/<%= ticker %>/addComment " method="POST" class="w-full">

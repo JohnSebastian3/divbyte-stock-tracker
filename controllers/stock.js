@@ -66,7 +66,10 @@ module.exports = {
             firstMonth = Number(firstMonth);
           }
     
-          let secondMonth = dividendInfo.data.historical[1].paymentDate.slice(5, 7);
+          let secondMonth;
+          if(dividendInfo.data.historical.length > 1) {
+            secondMonth = dividendInfo.data.historical[1].paymentDate.slice(5, 7);
+          }
           
           if(Number(secondMonth) < 10) {
             secondMonth = Number(secondMonth.slice(1));

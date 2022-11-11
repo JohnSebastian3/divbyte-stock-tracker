@@ -4,7 +4,7 @@ const Comment = require('../models/Comment');
 const User = require('../models/User');
 const dayjs = require('dayjs')
 const relativeTime = require('dayjs/plugin/relativeTime')
-const updateLocale = require('dayjs/plugin/updateLocale')
+const updateLocale = require('dayjs/plugin/updateLocale');
 dayjs.extend(updateLocale);
 
 dayjs.updateLocale('en', {
@@ -53,33 +53,22 @@ module.exports = {
       if(Object.keys(dividendInfo.data).length > 0 ) {
         if(dividendInfo.data.historical[0].dividend != 0) {
           divDate = dividendInfo.data.historical[0].label;
-          let firstMonth = dividendInfo.data.historical[0].paymentDate.slice(5, 7);
+          let firstMonth = Number(new Date(dividendInfo.data.historical[0].paymentDate).getMonth());
           dividend = dividendInfo.data.historical[0].dividend.toLocaleString('en-US', {
             maximumFractionDigits: 2,
             minimumFractionDigits: 2
           });
-  
-  
-          if(Number(firstMonth) < 10) { 
-            firstMonth = Number(firstMonth.slice(1));
-          } else {
-            firstMonth = Number(firstMonth);
-          }
+
     
           let secondMonth;
           if(dividendInfo.data.historical.length > 1) {
-            secondMonth = dividendInfo.data.historical[1].paymentDate.slice(5, 7);
+            secondMonth = Number(new Date(dividendInfo.data.historical[1].paymentDate).getMonth());
           }
           
-          if(Number(secondMonth) < 10) {
-            secondMonth = Number(secondMonth.slice(1));
-          } else {
-            secondMonth = Number(secondMonth);
-          }
     
           let diff = Math.abs(firstMonth - secondMonth);
-          if(diff % 12 === 0) {
-            freq = 'Annual';
+          if(Number.isNaN(parseFloat(diff))) {
+            freq = '-';
             dividendYield = ((dividendInfo.data.historical[0].dividend  / profile.data[0].price) * 100).toFixed(2);
           } else if(diff % 6 === 0) {
             freq = 'Semi-Annual';

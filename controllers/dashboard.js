@@ -60,9 +60,17 @@ module.exports = {
 
           if(divResponse.data.historical) {
             const currentDivInfo = divResponse.data.historical[0];
-            const pastDivInfo = divResponse.data.historical[1];
-            let firstMonth = currentDivInfo.paymentDate.slice(5, 7);
-            let secondMonth = pastDivInfo.paymentDate.slice(5, 7);
+            let pastDivInfo;
+            let firstMonth;
+            let secondMonth;
+            if(divResponse.data.historical.length > 1) {
+              // DATE DATE DATE
+              pastDivInfo = divResponse.data.historical[1];
+              firstMonth = currentDivInfo.paymentDate.slice(5, 7);
+              secondMonth = pastDivInfo.paymentDate.slice(5, 7);
+            } else {
+              pastDivInfo = {};
+            }
             
             if(Number(firstMonth) < 10) { 
               // Gets rid of zero at the front

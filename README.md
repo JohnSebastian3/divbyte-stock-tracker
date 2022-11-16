@@ -1,5 +1,5 @@
 # DivByte
-This is my 100Hours Project. It is a simple stock portfolio tracker. 
+This is a stock portfolio tracker. 
 Link to live project: https://divbyte.up.railway.app/
 
 ## How It's Made:

@@ -2,6 +2,8 @@
 This is a stock portfolio tracker. 
 Link to live project: https://divbyte.up.railway.app/
 
+![alt-tag](public/images/divbyte.gif)
+
 ## How It's Made:
 
 **Tech used:** HTML, CSS, JavaScript, EJS, Tailwind, MongoDB, Express, NodeJS

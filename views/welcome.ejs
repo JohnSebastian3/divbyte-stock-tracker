@@ -1,82 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"     >
-  <!-- <link rel="stylesheet" href="/css/welcome.css"> -->
-  <link rel="stylesheet" href="/css/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="/css/welcome.css"> -->
+    <link rel="stylesheet" href="/css/styles.css" />
 
-  <title>DivByte - Portfolio Manager </title>
-</head>
-<body class="flex flex-col justify-center body gap-14 sm:gap-20">
-  <%- include ('./partials/header') %>
-  <div class="mx-auto flex flex-col justify-center gap-20 container">
-    <div class="text-center flex flex-col gap-12">
-      <h1 id="heading-main" class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-indigo-500">The Simple & Elegant Portfolio Tracker App</h1>
-      <p class="text-2xl sm:text-3xl lg:text-4xl">Stay Up to Date with the Performance and Dividend Income of Your Portfolio</p>
-    </div>
+    <title>DivByte - Portfolio Manager</title>
+  </head>
+  <body class="flex flex-col justify-center body gap-14 sm:gap-20">
+    <%- include ('./partials/header') %>
+    <div class="mx-auto flex flex-col justify-center gap-20 container">
+      <div class="text-center flex flex-col gap-12">
+        <h1
+          id="heading-main"
+          class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-indigo-500"
+        >
+          The Simple & Elegant Portfolio Tracker App
+        </h1>
+        <h2 class="text-base sm:text-lg lg:text-xl">
+          Stay Up to Date with the Performance and Dividend Income of Your
+          Portfolio
+        </h2>
+      </div>
 
-    <div class="card">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl text-center font-semibold text-indigo-500">Create Your Account</h2>
-      <%- include ('./partials/messages') %>
-      <form action="/register" method="POST" id="register" class="flex flex-col gap-4">
-        <div class="flex flex-col gap-1">
-          <label for="name" class="text-base sm:text-xl">Name</label>
-          <input
-            type="name"
-            id="name"
-            name="name"
-            class="input"
-            placeholder="Enter Name"
-            maxlength="26"
-            value="<%= typeof name != 'undefined' ? name : '' %>"
-          />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label for="email" class="text-base sm:text-xl">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="input"
-            placeholder="Enter Email"
-            value="<%= typeof email != 'undefined' ? email : '' %>"
-          />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label for="password" class="text-base sm:text-xl">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="input"
-            placeholder="Create Password"
-            value="<%= typeof password != 'undefined' ? password : '' %>"
-          />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label for="password2" class="text-base sm:text-xl">Confirm Password</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            class="input"
-            placeholder="Confirm Password"
-            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-          />
-        </div>
-        <div class="flex justify-center">
-          <button type="submit" class="btn-primary mt-2 basis-full mb-1">
-            Register
-          </button>
-        </div>
-      </form>
+      <div class="card">
+        <h2
+          class="text-2xl sm:text-3xl lg:text-4xl text-center font-semibold text-indigo-500"
+        >
+          Create Your Account
+        </h2>
+        <%- include ('./partials/messages') %>
+        <form
+          action="/register"
+          method="POST"
+          id="register"
+          class="flex flex-col gap-4"
+        >
+          <div class="flex flex-col gap-1">
+            <label for="name" class="text-base sm:text-xl">Name</label>
+            <input
+              type="name"
+              id="name"
+              name="name"
+              class="input"
+              placeholder="Enter Name"
+              maxlength="26"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="email" class="text-base sm:text-xl">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="input"
+              placeholder="Enter Email"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="password" class="text-base sm:text-xl">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="input"
+              placeholder="Create Password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="password2" class="text-base sm:text-xl"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              id="password2"
+              name="password2"
+              class="input"
+              placeholder="Confirm Password"
+              value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+            />
+          </div>
+          <div class="flex justify-center">
+            <button type="submit" class="btn-primary mt-2 basis-full mb-1">
+              Register
+            </button>
+          </div>
+        </form>
 
-      <p class="text-sm sm:text-xl text-center">Have an account? <a href="/login" class="link">Login Here</a></p>
-    </div>
+        <p class="text-sm sm:text-xl text-center">
+          Have an account? <a href="/login" class="link">Login Here</a>
+        </p>
+      </div>
     </div>
     <%- include ('./partials/footer') %>
-
-</body>
+  </body>
 </html>
